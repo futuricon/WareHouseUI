@@ -25,10 +25,44 @@ namespace WareHouse.Views
 			InitializeComponent();
 		}
 
-		private void RadioButton_Checked(object sender, RoutedEventArgs e)
+
+		private void RadioButton_Click(object sender, RoutedEventArgs e)
 		{
-			GridPrincipal.Children.Clear();
-			GridPrincipal.Children.Add(new WareHouseView());
+			RadioButton rb = (RadioButton)sender;
+
+			switch (rb.Content.ToString())
+			{
+				case "WareHouses":
+					GridPrincipal.Children.Clear();
+					GridPrincipal.Children.Add(new WareHouseView());
+					break;
+				case "Income":
+					GridPrincipal.Children.Clear();
+					GridPrincipal.Children.Add(new IncomeView());
+					break;
+				case "Realization":
+					GridPrincipal.Children.Clear();
+					GridPrincipal.Children.Add(new RealizationView());
+					break;
+				case "Return":
+					GridPrincipal.Children.Clear();
+					GridPrincipal.Children.Add(new WareHouseView());
+					break;
+				case "Delivers":
+					GridPrincipal.Children.Clear();
+					GridPrincipal.Children.Add(new WareHouseView());
+					break;
+				case "Clients":
+					GridPrincipal.Children.Clear();
+					GridPrincipal.Children.Add(new WareHouseView());
+					break;
+				case "Expenses":
+					GridPrincipal.Children.Clear();
+					GridPrincipal.Children.Add(new ExpensesView());
+					break;
+				default:
+					break;
+			}
 		}
 	}
 }

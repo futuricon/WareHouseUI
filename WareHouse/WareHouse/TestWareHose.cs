@@ -8,14 +8,14 @@ namespace WareHouse
     {
         public int Id { get; set; }
         public string Name { get; set; }
-        public int Amount { get; set; }
+        public decimal Remainder { get; set; }
         public bool Edit { get; set; }
 
-        public TestWareHose(int id, string name, int amount, bool edit)
+        public TestWareHose(int id, string name, decimal remainder, bool edit)
         {
             Id = id;
             Name = name;
-            Amount = amount;
+            Remainder = remainder;
             Edit = edit;
         }
     }

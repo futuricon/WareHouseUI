@@ -323,24 +323,24 @@
                     <!--#region MenuLeft Menu-->
                     <CheckBox x:Name="ChBMenu" Content="MENU" Height="40" Foreground="#515974" FontWeight="Light" FontSize="14" VerticalAlignment="Top" HorizontalContentAlignment="Left" Margin="0,0,0,0" Template="{DynamicResource ChBMenuLeft}" IsChecked="True"/>
                     <StackPanel x:Name="SPMenu" Orientation="Vertical" Margin="0">
-                        <RadioButton Content="WareHouses" HorizontalContentAlignment="Left" VerticalContentAlignment="Center" Foreground="#FFDEDEDE" GroupName="MenuLeftRB" VerticalAlignment="Top" Margin="0" Height="43" Style="{StaticResource RBStyleMenuLeft}" BorderBrush="{x:Null}" Checked="RadioButton_Checked">
+                        <RadioButton Content="WareHouses" HorizontalContentAlignment="Left" VerticalContentAlignment="Center" Foreground="#FFDEDEDE" GroupName="MenuLeftRB" VerticalAlignment="Top" Margin="0" Height="43" Style="{StaticResource RBStyleMenuLeft}" BorderBrush="{x:Null}" Click="RadioButton_Click">
                             <RadioButton.Background>
                                 <ImageBrush ImageSource="/Resources/IconWareHouse.png" Stretch="Uniform"/>
                             </RadioButton.Background>
                         </RadioButton>
-                        <RadioButton Content="Income" HorizontalContentAlignment="Left" VerticalContentAlignment="Center" Foreground="#FFDEDEDE" GroupName="MenuLeftRB" VerticalAlignment="Top" Margin="0" Height="43" Style="{StaticResource RBStyleMenuLeft}">
+                        <RadioButton Content="Income" HorizontalContentAlignment="Left" VerticalContentAlignment="Center" Foreground="#FFDEDEDE" GroupName="MenuLeftRB" VerticalAlignment="Top" Margin="0" Height="43" Style="{StaticResource RBStyleMenuLeft}" Click="RadioButton_Click">
                             <RadioButton.Background>
                                 <ImageBrush ImageSource="/Resources/IconIncome.png" Stretch="Uniform"/>
                             </RadioButton.Background>
                         </RadioButton>
-                        <RadioButton Content="Realization" HorizontalContentAlignment="Left" VerticalContentAlignment="Center" Foreground="#FFDEDEDE" GroupName="MenuLeftRB" VerticalAlignment="Top" Margin="0" Height="43" Style="{StaticResource RBStyleMenuLeft}">
+                        <RadioButton Content="Realization" HorizontalContentAlignment="Left" VerticalContentAlignment="Center" Foreground="#FFDEDEDE" GroupName="MenuLeftRB" VerticalAlignment="Top" Margin="0" Height="43" Style="{StaticResource RBStyleMenuLeft}" Click="RadioButton_Click">
                             <RadioButton.Background>
                                 <ImageBrush ImageSource="/Resources/IconRealization.png" Stretch="Uniform"/>
                             </RadioButton.Background>
                         </RadioButton>
-                        <RadioButton Content="Return" HorizontalContentAlignment="Left" VerticalContentAlignment="Center" Foreground="#FFDEDEDE" GroupName="MenuLeftRB" VerticalAlignment="Top" Margin="0" Height="43" Style="{StaticResource RBStyleMenuLeft}">
+                        <RadioButton Content="Expenses" HorizontalContentAlignment="Left" VerticalContentAlignment="Center" Foreground="#FFDEDEDE" GroupName="MenuLeftRB" VerticalAlignment="Top" Margin="0" Height="43" Style="{StaticResource RBStyleMenuLeft}" Click="RadioButton_Click">
                             <RadioButton.Background>
-                                <ImageBrush ImageSource="/Resources/IconReturns.png" Stretch="Uniform"/>
+                                <ImageBrush ImageSource="/Resources/IconExpenses.png" Stretch="Uniform"/>
                             </RadioButton.Background>
                         </RadioButton>
                         <StackPanel.Style>
@@ -377,19 +377,19 @@
                     <!--#region MenuLeft More-->
                     <CheckBox x:Name="ChBMore" Content="MORE" Height="40" Foreground="#515974" FontWeight="Light" FontSize="14" VerticalAlignment="Top" HorizontalContentAlignment="Left" Margin="0,0,0,0" Template="{DynamicResource ChBMenuLeft}" IsChecked="True"/>
                     <StackPanel>
-                        <RadioButton Content="Delivers" HorizontalContentAlignment="Left" VerticalContentAlignment="Center" Foreground="#FFDEDEDE" GroupName="MenuLeftRB" VerticalAlignment="Top" Margin="0" Height="43" Style="{StaticResource RBStyleMenuLeft}">
+                        <RadioButton Content="Delivers" HorizontalContentAlignment="Left" VerticalContentAlignment="Center" Foreground="#FFDEDEDE" GroupName="MenuLeftRB" VerticalAlignment="Top" Margin="0" Height="43" Style="{StaticResource RBStyleMenuLeft}" Click="RadioButton_Click">
                             <RadioButton.Background>
                                 <ImageBrush ImageSource="/Resources/IconDelivers.png" Stretch="Uniform"/>
                             </RadioButton.Background>
                         </RadioButton>
-                        <RadioButton Content="Clients" HorizontalContentAlignment="Left" VerticalContentAlignment="Center" Foreground="#FFDEDEDE" GroupName="MenuLeftRB" VerticalAlignment="Top" Margin="0" Height="43" Style="{StaticResource RBStyleMenuLeft}">
+                        <RadioButton Content="Clients" HorizontalContentAlignment="Left" VerticalContentAlignment="Center" Foreground="#FFDEDEDE" GroupName="MenuLeftRB" VerticalAlignment="Top" Margin="0" Height="43" Style="{StaticResource RBStyleMenuLeft}" Click="RadioButton_Click">
                             <RadioButton.Background>
                                 <ImageBrush ImageSource="/Resources/IconClients.png" Stretch="Uniform"/>
                             </RadioButton.Background>
                         </RadioButton>
-                        <RadioButton Content="Expenses" HorizontalContentAlignment="Left" VerticalContentAlignment="Center" Foreground="#FFDEDEDE" GroupName="MenuLeftRB" VerticalAlignment="Top" Margin="0" Height="43" Style="{StaticResource RBStyleMenuLeft}">
+                        <RadioButton Content="Return" HorizontalContentAlignment="Left" VerticalContentAlignment="Center" Foreground="#FFDEDEDE" GroupName="MenuLeftRB" VerticalAlignment="Top" Margin="0" Height="43" Style="{StaticResource RBStyleMenuLeft}" Click="RadioButton_Click">
                             <RadioButton.Background>
-                                <ImageBrush ImageSource="/Resources/IconExpenses.png" Stretch="Uniform"/>
+                                <ImageBrush ImageSource="/Resources/IconReturns.png" Stretch="Uniform"/>
                             </RadioButton.Background>
                         </RadioButton>
                         <StackPanel.Style>
@@ -529,7 +529,7 @@
             
             <!--#region MenuBottom-->
             <Border Grid.Row="2" BorderBrush="#171a20" BorderThickness="0,1,0,0" Background="#FF292F37">
-                <Button Content="Add New" Template="{DynamicResource BtnStyleAddNew}" Width="147" Height="37" HorizontalAlignment="Right" Margin="0,0,40,0"/>
+                <Button Content="Add New" Template="{DynamicResource BtnStyleAddNew}" FontSize="13" FontWeight="Normal" Width="147" Height="37" HorizontalAlignment="Right" Margin="0,0,40,0"/>
             </Border>
             <!--#endregion MenuBottom-->
         </Grid>

@@ -299,6 +299,47 @@
                     <VisualState x:Name="Normal">
                         <Storyboard>
                             <ColorAnimationUsingKeyFrames Storyboard.TargetProperty="(Panel.Background).(SolidColorBrush.Color)" Storyboard.TargetName="borderNew">
+                                <EasingColorKeyFrame KeyTime="0" Value="#FF1B2133"/>
+                            </ColorAnimationUsingKeyFrames>
+                        </Storyboard>
+                    </VisualState>
+                    <VisualState x:Name="MouseOver">
+                        <Storyboard>
+                            <ColorAnimationUsingKeyFrames Storyboard.TargetProperty="(Panel.Background).(SolidColorBrush.Color)" Storyboard.TargetName="borderNew">
+                                <EasingColorKeyFrame KeyTime="0" Value="#FF555960"/>
+                            </ColorAnimationUsingKeyFrames>
+                        </Storyboard>
+                    </VisualState>
+                    <VisualState x:Name="Pressed">
+                        <Storyboard>
+                            <ColorAnimationUsingKeyFrames Storyboard.TargetProperty="(Panel.Background).(SolidColorBrush.Color)" Storyboard.TargetName="borderNew">
+                                <EasingColorKeyFrame KeyTime="0" Value="#FF1B2133"/>
+                            </ColorAnimationUsingKeyFrames>
+                        </Storyboard>
+                    </VisualState>
+                    <VisualState x:Name="Disabled"/>
+                </VisualStateGroup>
+            </VisualStateManager.VisualStateGroups>
+            <Border x:Name="borderNew" CornerRadius="19" Background="#FF1B2133">
+                <Grid>
+                    <Rectangle x:Name="NewIco" Width="18" Height="18" HorizontalAlignment="Left" Margin="7.5,0,0,0">
+                        <Rectangle.Fill>
+                            <ImageBrush ImageSource="/Resources/IconAddNew.png" Stretch="Uniform"/>
+                        </Rectangle.Fill>
+                    </Rectangle>
+                    <ContentPresenter x:Name="contentPresenterNew" Focusable="False" HorizontalAlignment="{TemplateBinding HorizontalContentAlignment}" Margin="41,0,0,0" RecognizesAccessKey="True" SnapsToDevicePixels="{TemplateBinding SnapsToDevicePixels}" VerticalAlignment="{TemplateBinding VerticalContentAlignment}"/>
+                </Grid>
+            </Border>
+        </Grid>
+    </ControlTemplate>
+    
+    <ControlTemplate x:Key="BtnStyleAddNew2" TargetType="{x:Type Button}">
+        <Grid>
+            <VisualStateManager.VisualStateGroups>
+                <VisualStateGroup x:Name="CommonStates">
+                    <VisualState x:Name="Normal">
+                        <Storyboard>
+                            <ColorAnimationUsingKeyFrames Storyboard.TargetProperty="(Panel.Background).(SolidColorBrush.Color)" Storyboard.TargetName="borderNew">
                                 <EasingColorKeyFrame KeyTime="0" Value="#FF292F37"/>
                             </ColorAnimationUsingKeyFrames>
                         </Storyboard>
@@ -320,9 +361,9 @@
                     <VisualState x:Name="Disabled"/>
                 </VisualStateGroup>
             </VisualStateManager.VisualStateGroups>
-            <Border x:Name="borderNew" CornerRadius="19" Background="#FF1B2133" >
+            <Border x:Name="borderNew" CornerRadius="19" Background="#FF292F37">
                 <Grid>
-                    <Rectangle x:Name="NewIco" Width="22" Height="22" HorizontalAlignment="Left" Margin="7.5,0,0,0">
+                    <Rectangle x:Name="NewIco" Width="18" Height="18" HorizontalAlignment="Left" Margin="7.5,0,0,0">
                         <Rectangle.Fill>
                             <ImageBrush ImageSource="/Resources/IconAddNew.png" Stretch="Uniform"/>
                         </Rectangle.Fill>

@@ -27,7 +27,7 @@
     <None Remove="Resources\IconView.png" />
     <None Remove="Resources\IconWareHouse.png" />
     <None Remove="Resources\MMFLogo.png" />
-    <None Remove="Views\MMFLogo.png" />
+    <None Remove="Views\MMFLogoBig.png" />
   </ItemGroup>
 
   <ItemGroup>
@@ -78,7 +78,7 @@
     <Resource Include="Resources\IconView.png" />
     <Resource Include="Resources\IconWareHouse.png" />
     <Resource Include="Resources\MMFLogo.png" />
-    <Resource Include="Views\MMFLogo.png" />
+    <Resource Include="Resources\MMFLogoBig.png" />
   </ItemGroup>
 
   <ItemGroup>
