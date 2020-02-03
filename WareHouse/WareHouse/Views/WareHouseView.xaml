@@ -16,7 +16,7 @@
             <Setter Property="Template">
                 <Setter.Value>
                     <ControlTemplate TargetType="{x:Type ListViewItem}">
-                        <Border Padding="0, 5" BorderBrush="#171a20" BorderThickness="1,0,0,0" Background="{TemplateBinding Background}">
+                        <Border Padding="0" BorderBrush="#171a20" BorderThickness="0" Background="{TemplateBinding Background}">
                             <GridViewRowPresenter HorizontalAlignment="Stretch" VerticalAlignment="{TemplateBinding VerticalContentAlignment}" Width="Auto" Margin="0" Content="{TemplateBinding Content}"/>
                         </Border>
                     </ControlTemplate>
@@ -52,7 +52,7 @@
     </UserControl.Resources>
     
     <Grid Background="#FF292F37">
-        <ListView x:Name="listView" ItemsSource="{Binding TestWareHose}" behaviours:GridViewColumnResize.Enabled="True" ItemContainerStyle="{StaticResource LVItemStyle}" HorizontalContentAlignment="Stretch" Foreground="#DDF9F9F9" Background="{x:Null}" BorderBrush="{x:Null}">
+        <ListView x:Name="listView" ItemsSource="{Binding TestWareHose}" behaviours:GridViewColumnResize.Enabled="True" ItemContainerStyle="{StaticResource LVItemStyle}" ScrollViewer.HorizontalScrollBarVisibility="Disabled" HorizontalContentAlignment="Stretch" Foreground="#DDF9F9F9" Background="{x:Null}" BorderBrush="{x:Null}">
             
             <ListView.View>
                 <GridView ScrollViewer.VerticalScrollBarVisibility="Auto">
@@ -60,7 +60,9 @@
                         <!--DisplayMemberBinding="{Binding Name}"-->
                         <GridViewColumn.CellTemplate>
                             <DataTemplate>
-                                <Label Content="{Binding Name}" Padding="10,0,0,0" Margin="0" HorizontalContentAlignment="Left" Foreground="#FFF0F0F0" BorderThickness="1,0,0,0" BorderBrush="#171a20"/>
+                                <Border BorderBrush="#171a20" BorderThickness="1,0,0,0" Margin="-6,-23,0,-23">
+                                    <Label Content="{Binding Name}" Padding="10,0,0,0" Margin="0" HorizontalContentAlignment="Left" Foreground="#FFF0F0F0" VerticalAlignment="Center"/>
+                                </Border>    
                             </DataTemplate>
                         </GridViewColumn.CellTemplate>
                     </GridViewColumn>
@@ -69,7 +71,9 @@
                         <!--DisplayMemberBinding="{Binding Amount}"-->
                         <GridViewColumn.CellTemplate>
                             <DataTemplate>
-                                <Label Content="{Binding Amount}" Padding="10,0,0,0" Margin="0" HorizontalContentAlignment="Left" Foreground="#FFF0F0F0" BorderThickness="1,0,0,0" BorderBrush="#171a20"/>
+                                <Border BorderBrush="#171a20" BorderThickness="1,0,0,0" Margin="-6,-23,0,-23">
+                                    <Label Content="{Binding Amount}" Padding="10,0,0,0" Margin="0" HorizontalContentAlignment="Left" Foreground="#FFF0F0F0" VerticalAlignment="Center"/>
+                                </Border>
                             </DataTemplate>
                         </GridViewColumn.CellTemplate>
                     </GridViewColumn>
@@ -78,37 +82,40 @@
                         <!--DisplayMemberBinding="{Binding Edit}"-->
                         <GridViewColumn.CellTemplate>
                             <DataTemplate>
-                                <StackPanel Orientation="Horizontal" Margin="3,0,0,0">
-                                    <Border Margin="0" Width="20" Height="20" CornerRadius="100" Background="#FFE0E0E0">
-                                        <Ellipse Margin="0" Width="10" Height="10" HorizontalAlignment="Center" VerticalAlignment="Center">
-                                            <Ellipse.Style>
-                                                <Style TargetType="Ellipse">
-                                                    <Setter Property="Fill" Value="#FF2BB618"/>
-                                                    <Style.Triggers>
-                                                        <DataTrigger Binding="{Binding Edit}" Value="False">
-                                                            <Setter Property="Fill" Value="#B61818" />
-                                                        </DataTrigger>
-                                                    </Style.Triggers>
-                                                </Style>
-                                            </Ellipse.Style>
-                                        </Ellipse>
-                                    </Border>
-                                    <Button Content="" Margin="7,0,0,0" HorizontalAlignment="Right" Height="35" VerticalAlignment="Center" Width="35" BorderBrush="#00000000" >
-                                        <Button.Background>
-                                            <ImageBrush ImageSource="/Resources/IconEdit.png" Stretch="Uniform"/>
-                                        </Button.Background>
-                                    </Button>
-                                    <Button Content="" Margin="7,0,0,0" HorizontalAlignment="Right" Height="35" VerticalAlignment="Center" Width="35" BorderBrush="#00000000" >
-                                        <Button.Background>
-                                            <ImageBrush ImageSource="/Resources/IconView.png" Stretch="Uniform"/>
-                                        </Button.Background>
-                                    </Button>
-                                    <Button Content="" Margin="7,0,0,0" HorizontalAlignment="Right" Height="35" VerticalAlignment="Center" Width="35" BorderBrush="#00000000" >
-                                        <Button.Background>
-                                            <ImageBrush ImageSource="/Resources/IconDelete.png" Stretch="Uniform"/>
-                                        </Button.Background>
-                                    </Button>
-                                </StackPanel>
+                                <Grid>
+                                    <Rectangle Width="1" Height="50" Fill="#171a20" HorizontalAlignment="Left" Margin="-6,-7,0,-7"/>
+                                    <StackPanel Orientation="Horizontal" Margin="2,5,0,5">
+                                        <Border Margin="0" Width="20" Height="20" CornerRadius="100" Background="#FFE0E0E0">
+                                            <Ellipse Margin="0" Width="10" Height="10" HorizontalAlignment="Center" VerticalAlignment="Center">
+                                                <Ellipse.Style>
+                                                    <Style TargetType="Ellipse">
+                                                        <Setter Property="Fill" Value="#FF2BB618"/>
+                                                        <Style.Triggers>
+                                                            <DataTrigger Binding="{Binding Edit}" Value="False">
+                                                                <Setter Property="Fill" Value="#B61818" />
+                                                            </DataTrigger>
+                                                        </Style.Triggers>
+                                                    </Style>
+                                                </Ellipse.Style>
+                                            </Ellipse>
+                                        </Border>
+                                        <Button Content="" Margin="7,0,0,0" HorizontalAlignment="Right" Height="35" VerticalAlignment="Center" Width="35" BorderBrush="#00000000" >
+                                            <Button.Background>
+                                                <ImageBrush ImageSource="/Resources/IconEdit.png" Stretch="Uniform"/>
+                                            </Button.Background>
+                                        </Button>
+                                        <Button Content="" Margin="7,0,0,0" HorizontalAlignment="Right" Height="35" VerticalAlignment="Center" Width="35" BorderBrush="#00000000" >
+                                            <Button.Background>
+                                                <ImageBrush ImageSource="/Resources/IconView.png" Stretch="Uniform"/>
+                                            </Button.Background>
+                                        </Button>
+                                        <Button Content="" Margin="7,0,0,0" HorizontalAlignment="Right" Height="35" VerticalAlignment="Center" Width="35" BorderBrush="#00000000" >
+                                            <Button.Background>
+                                                <ImageBrush ImageSource="/Resources/IconDelete.png" Stretch="Uniform"/>
+                                            </Button.Background>
+                                        </Button>
+                                    </StackPanel>
+                                </Grid>
                             </DataTemplate>
                         </GridViewColumn.CellTemplate>
                     </GridViewColumn>

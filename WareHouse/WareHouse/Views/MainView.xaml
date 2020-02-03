@@ -179,7 +179,91 @@
             </Setter>
         </Style>-->
 
-       
+        <Style x:Key="ScrollThumbs" TargetType="{x:Type Thumb}">
+            <Setter Property="Template">
+                <Setter.Value>
+                    <ControlTemplate>
+                        <Grid x:Name="Grid" Background="#00000000" Width="12" HorizontalAlignment="Center" FlowDirection="LeftToRight" Margin="0">
+                            <Rectangle VerticalAlignment="Stretch" Width="12" 
+                                           Height="Auto" Fill="#00000000" Margin="0" HorizontalAlignment="Center"/>
+                            <Border x:Name="Rectangle1" CornerRadius="5" 
+                                        VerticalAlignment="Stretch" Width="10" Height="Auto" 
+                                        Background="{TemplateBinding Background}" Margin="0,55,0,5" HorizontalAlignment="Stretch"/>
+                        </Grid>
+                        <ControlTemplate.Triggers>
+                            <Trigger Property="Tag" Value="Horizontal" FrameworkElement.FlowDirection="RightToLeft">
+                                <Setter TargetName="Rectangle1" Property="Width" Value="10"/>
+                                <Setter TargetName="Rectangle1" Property="Height" Value="7"/>
+                            </Trigger>
+                        </ControlTemplate.Triggers>
+                    </ControlTemplate>
+                </Setter.Value>
+            </Setter>
+        </Style>
+
+        <!--#region SCROLLBARS-->
+        <Style x:Key="{x:Type ScrollBar}" TargetType="{x:Type ScrollBar}">
+            <Setter Property="Stylus.IsFlicksEnabled" Value="False"/>
+            <Setter Property="Foreground" Value="#404955"/>
+            <Setter Property="Background" Value="DarkGray"/>
+            <Setter Property="Width" Value="10"/>
+            <Setter Property="Template">
+                <Setter.Value>
+                    <ControlTemplate TargetType="{x:Type ScrollBar}">
+                        <Grid x:Name="GridRoot" Background="#292F37" HorizontalAlignment="Stretch" FlowDirection="RightToLeft">
+                            
+                            <Track x:Name="PART_Track" Grid.Row="0" IsDirectionReversed="true" Focusable="False" HorizontalAlignment="Center" FlowDirection="RightToLeft">
+                                <Track.Thumb>
+                                    <Thumb x:Name="Thumb" Background="{TemplateBinding Foreground}" 
+                                               Style="{DynamicResource ScrollThumbs}" HorizontalAlignment="Center" FlowDirection="RightToLeft" HorizontalContentAlignment="Center"/>
+                                </Track.Thumb>
+                                <Track.IncreaseRepeatButton>
+                                    <RepeatButton x:Name="PageUp" Command="ScrollBar.PageDownCommand" Opacity="0" Focusable="False"/>
+                                </Track.IncreaseRepeatButton>
+                                <Track.DecreaseRepeatButton>
+                                    <RepeatButton x:Name="PageDown" Command="ScrollBar.PageUpCommand" Opacity="0" Focusable="False"/>
+                                </Track.DecreaseRepeatButton>
+                            </Track>
+
+                        </Grid>
+
+                        <ControlTemplate.Triggers>
+                            <Trigger SourceName="Thumb" Property="IsMouseOver" Value="true">
+                                <Setter Value="{DynamicResource ButtonSelectBrush}" 
+                                            TargetName="Thumb" Property="Background"/>
+                            </Trigger>
+                            <Trigger SourceName="Thumb" Property="IsDragging" Value="true">
+                                <Setter Value="{DynamicResource DarkBrush}" TargetName="Thumb" Property="Background"/>
+                            </Trigger>
+
+                            <Trigger Property="IsEnabled" Value="false">
+                                <Setter TargetName="Thumb" Property="Visibility" Value="Collapsed"/>
+                            </Trigger>
+                            <Trigger Property="Orientation" Value="Horizontal">
+                                <Setter TargetName="GridRoot" Property="LayoutTransform">
+                                    <Setter.Value>
+                                        <RotateTransform Angle="-90"/>
+                                    </Setter.Value>
+                                </Setter>
+                                <Setter TargetName="PART_Track" Property="LayoutTransform">
+                                    <Setter.Value>
+                                        <RotateTransform Angle="-90"/>
+                                    </Setter.Value>
+                                </Setter>
+                                <Setter Property="Width" Value="Auto"/>
+                                <Setter Property="Height" Value="12"/>
+                                <Setter TargetName="Thumb" Property="Tag" Value="Horizontal"/>
+                                <Setter TargetName="PageDown" Property="Command" Value="ScrollBar.PageLeftCommand"/>
+                                <Setter TargetName="PageUp" Property="Command" Value="ScrollBar.PageRightCommand"/>
+                            </Trigger>
+                        </ControlTemplate.Triggers>
+                    </ControlTemplate>
+                </Setter.Value>
+            </Setter>
+        </Style>
+        <!--#endregion SCROLLBARS-->
+
+
 
     </Window.Resources>
     <Window.Triggers>
@@ -353,7 +437,7 @@
             <Grid.RowDefinitions>
                 <RowDefinition Height="80"/>
                 <RowDefinition Height="*"/>
-                <RowDefinition Height="70"/>
+                <RowDefinition Height="75"/>
             </Grid.RowDefinitions>
 
             <!--#region MenuTop-->
@@ -439,30 +523,13 @@
 
             <!--#region Data-->
             <Grid x:Name="GridPrincipal" Grid.Row="1" Background="#FF292F37">
-                <!--<ListView x:Name="listView"  behaviours:GridViewColumnResize.Enabled="True" ItemContainerStyle="{StaticResource LVItemStyle}" HorizontalContentAlignment="Stretch">
-                    <ListView.View>
-                        <GridView ScrollViewer.VerticalScrollBarVisibility="Auto">
-                            <GridViewColumn behaviours:GridViewColumnResize.Width="*" Header="Name" HeaderContainerStyle="{DynamicResource OrderGridViewColumnHeaderStyle}" Width="Auto" DisplayMemberBinding="{Binding Name}"/>
-                            <GridViewColumn behaviours:GridViewColumnResize.Width="*" Header="Amount" HeaderContainerStyle="{DynamicResource OrderGridViewColumnHeaderStyle}" Width="Auto" DisplayMemberBinding="{Binding Amount}"/>
-                            --><!--<GridViewColumn Header="" HeaderContainerStyle="{DynamicResource OrderGridViewColumnHeaderStyle}" Width="Auto" DisplayMemberBinding="{Binding Edit}" FrameworkElement.FlowDirection="RightToLeft"/>--><!--
-                            <GridViewColumn Header="Edit" HeaderContainerStyle="{DynamicResource OrderGridViewColumnHeaderStyle}" Width="160" DisplayMemberBinding="{Binding Edit}">
-                                <GridViewColumn.CellTemplate>
-                                    <DataTemplate>
-                                        <Button Content="" HorizontalAlignment="Right" Height="45" Margin="0,0,0,0" VerticalAlignment="Center" Width="45" />
-                                    </DataTemplate>
-                                </GridViewColumn.CellTemplate>
-                            </GridViewColumn>
-                        </GridView>
-                    </ListView.View>
-                </ListView>-->
+               
             </Grid>
             <!--#endregion Data-->
             
             <!--#region MenuBottom-->
             <Border Grid.Row="2" BorderBrush="#171a20" BorderThickness="0,1,0,0" Background="#FF292F37">
-                <StackPanel>
-                    
-                </StackPanel>
+                <Button Content="Add New" Template="{DynamicResource BtnStyleAddNew}" Width="147" Height="37" HorizontalAlignment="Right" Margin="0,0,40,0"/>
             </Border>
             <!--#endregion MenuBottom-->
         </Grid>

@@ -8,6 +8,7 @@
 
   <ItemGroup>
     <None Remove="Resources\Arrow.png" />
+    <None Remove="Resources\IconAddNew.png" />
     <None Remove="Resources\IconArrow.png" />
     <None Remove="Resources\IconClients.png" />
     <None Remove="Resources\IconDelete.png" />
@@ -59,6 +60,7 @@
   </ItemGroup>
 
   <ItemGroup>
+    <Resource Include="Resources\IconAddNew.png" />
     <Resource Include="Resources\IconArrow.png" />
     <Resource Include="Resources\IconClients.png" />
     <Resource Include="Resources\IconDelete.png" />
