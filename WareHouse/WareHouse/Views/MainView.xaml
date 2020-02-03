@@ -1,0 +1,471 @@
+﻿<Window x:Class="WareHouse.Views.MainView"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:prism="http://prismlibrary.com/"
+        prism:ViewModelLocator.AutoWireViewModel="True"
+        xmlns:localCtrl="http://wpfcontrols.com/"
+        xmlns:materialDesign="http://materialdesigninxaml.net/winfx/xaml/themes"
+        xmlns:provider="clr-namespace:WareHouse.Models.Provider"
+        xmlns:namespc="clr-namespace:WareHouse.Models"
+        xmlns:behaviours="clr-namespace:WareHouse.Behaviours"
+        mc:Ignorable="d"
+        xmlns:i="http://schemas.microsoft.com/expression/2010/interactivity"
+        Title="MainWindow" Height="720" Width="1280" WindowStartupLocation="CenterScreen">
+    <Window.Resources>
+        <provider:ProductProvider x:Key="Provider"/>
+        
+        <DataTemplate x:Key="StateTemplate">
+            <Grid>
+                <TextBlock Text="{Binding Path=Title}"></TextBlock>
+            </Grid>
+        </DataTemplate>
+        <Storyboard x:Key="OpenMenu">
+            <DoubleAnimationUsingKeyFrames Storyboard.TargetProperty="(FrameworkElement.Width)" Storyboard.TargetName="GridMenuLeft">
+                <EasingDoubleKeyFrame KeyTime="0" Value="70"/>
+                <EasingDoubleKeyFrame KeyTime="0:0:0.5" Value="225"/>
+            </DoubleAnimationUsingKeyFrames>
+        </Storyboard>
+
+        <Storyboard x:Key="CloseMenu">
+            <DoubleAnimationUsingKeyFrames Storyboard.TargetProperty="(FrameworkElement.Width)" Storyboard.TargetName="GridMenuLeft">
+                <EasingDoubleKeyFrame KeyTime="0" Value="225"/>
+                <EasingDoubleKeyFrame KeyTime="0:0:0.5" Value="70"/>
+            </DoubleAnimationUsingKeyFrames>
+        </Storyboard>
+
+        <Storyboard x:Key="ShowLogo">
+            <DoubleAnimationUsingKeyFrames Storyboard.TargetProperty="(FrameworkElement.Width)" Storyboard.TargetName="MMFLogo">
+                <EasingDoubleKeyFrame KeyTime="0" Value="0"/>
+                <EasingDoubleKeyFrame KeyTime="0:0:0.1" Value="127"/>
+            </DoubleAnimationUsingKeyFrames>
+            <DoubleAnimationUsingKeyFrames Storyboard.TargetProperty="(FrameworkElement.Width)" Storyboard.TargetName="UserName" >
+                <EasingDoubleKeyFrame KeyTime="0" Value="0"/>
+                <EasingDoubleKeyFrame KeyTime="0:0:0.1" Value="100"/>
+            </DoubleAnimationUsingKeyFrames>
+            <DoubleAnimationUsingKeyFrames Storyboard.TargetProperty="(FrameworkElement.Width)" Storyboard.TargetName="BTNSync" >
+                <EasingDoubleKeyFrame KeyTime="0" Value="37"/>
+                <EasingDoubleKeyFrame KeyTime="0:0:0.1" Value="147"/>
+            </DoubleAnimationUsingKeyFrames>
+            <ThicknessAnimationUsingKeyFrames Storyboard.TargetProperty="Margin" Storyboard.TargetName="UserImg" BeginTime="00:00:00">
+                <SplineThicknessKeyFrame KeyTime="00:00:00" Value="5,0,0,0" />
+                <SplineThicknessKeyFrame KeyTime="00:00:0.1" Value="20,0,0,0" />
+            </ThicknessAnimationUsingKeyFrames>
+        </Storyboard>
+
+        <Storyboard x:Key="HideLogo">
+            <DoubleAnimationUsingKeyFrames Storyboard.TargetProperty="(FrameworkElement.Width)" Storyboard.TargetName="MMFLogo">
+                <EasingDoubleKeyFrame KeyTime="0" Value="127"/>
+                <EasingDoubleKeyFrame KeyTime="0:0:0.1" Value="0"/>
+            </DoubleAnimationUsingKeyFrames>
+            <DoubleAnimationUsingKeyFrames Storyboard.TargetProperty="(FrameworkElement.Width)" Storyboard.TargetName="UserName" >
+                <EasingDoubleKeyFrame KeyTime="0" Value="100"/>
+                <EasingDoubleKeyFrame KeyTime="0:0:0" Value="0"/>
+            </DoubleAnimationUsingKeyFrames>
+            <DoubleAnimationUsingKeyFrames Storyboard.TargetProperty="(FrameworkElement.Width)" Storyboard.TargetName="BTNSync" >
+                <EasingDoubleKeyFrame KeyTime="0" Value="147"/>
+                <EasingDoubleKeyFrame KeyTime="0:0:0.1" Value="37"/>
+            </DoubleAnimationUsingKeyFrames>
+            <ThicknessAnimationUsingKeyFrames Storyboard.TargetProperty="Margin" Storyboard.TargetName="UserImg" BeginTime="00:00:00">
+                <SplineThicknessKeyFrame KeyTime="00:00:00" Value="20,0,0,0" />
+                <SplineThicknessKeyFrame KeyTime="00:00:0.1" Value="5,0,0,0" />
+            </ThicknessAnimationUsingKeyFrames>
+        </Storyboard>
+
+        <ControlTemplate x:Key="ChBMenuLeft" TargetType="{x:Type CheckBox}">
+            <Grid>
+                <VisualStateManager.VisualStateGroups>
+                    <VisualStateGroup x:Name="CheckStates">
+                        <VisualState x:Name="Checked">
+                            <Storyboard>
+                                <DoubleAnimationUsingKeyFrames Storyboard.TargetProperty="(UIElement.RenderTransform).(TransformGroup.Children)[2].(RotateTransform.Angle)" Storyboard.TargetName="rectangle">
+                                    <EasingDoubleKeyFrame KeyTime="00:00:0.2" Value="180"/>
+                                </DoubleAnimationUsingKeyFrames>
+                            </Storyboard>
+                        </VisualState>
+                        <VisualState x:Name="Unchecked">
+                            <Storyboard>
+                                <DoubleAnimationUsingKeyFrames Storyboard.TargetProperty="(UIElement.RenderTransform).(TransformGroup.Children)[2].(RotateTransform.Angle)" Storyboard.TargetName="rectangle">
+                                    <EasingDoubleKeyFrame KeyTime="00:00:0.2" Value="0"/>
+                                </DoubleAnimationUsingKeyFrames>
+                            </Storyboard>
+                        </VisualState>
+                        <VisualState x:Name="Indeterminate"/>
+                    </VisualStateGroup>
+                </VisualStateManager.VisualStateGroups>
+                <Rectangle>
+                    <Rectangle.Style>
+                        <Style TargetType="Rectangle">
+                            <Setter Property="Fill" Value="#02000000"/>
+                            <Style.Triggers>
+                                <DataTrigger Binding="{Binding ElementName=rectCover, Path=IsMouseOver}" Value="True">
+                                    <Setter Property="Fill" Value="#FF292F37"/>
+                                </DataTrigger>
+                            </Style.Triggers>
+                        </Style>
+                    </Rectangle.Style>
+                </Rectangle>
+                <ContentPresenter x:Name="contentPresenter" Margin="20,0,0,0" ContentTemplate="{TemplateBinding ContentTemplate}" Content="{TemplateBinding Content}" Grid.Column="1" ContentStringFormat="{TemplateBinding ContentStringFormat}" Focusable="False" HorizontalAlignment="{TemplateBinding HorizontalContentAlignment}" RecognizesAccessKey="True" SnapsToDevicePixels="{TemplateBinding SnapsToDevicePixels}" VerticalAlignment="{TemplateBinding VerticalContentAlignment}"/>
+                <Rectangle x:Name="rectangle" Width="15" HorizontalAlignment="Left" Margin="192,0,0,0" RenderTransformOrigin="0.5,0.5">
+
+                    <Rectangle.Fill>
+                        <ImageBrush ImageSource="/Resources/IconArrow.png" Stretch="Uniform"/>
+                    </Rectangle.Fill>
+
+                    <Rectangle.RenderTransform>
+                        <TransformGroup>
+                            <ScaleTransform/>
+                            <SkewTransform/>
+                            <RotateTransform/>
+                            <TranslateTransform/>
+                        </TransformGroup>
+                    </Rectangle.RenderTransform>
+
+                </Rectangle>
+                <Rectangle x:Name="rectCover" Fill="#02000000"/>
+            </Grid>
+        </ControlTemplate>
+
+        <ControlTemplate x:Key="BtnSync" TargetType="{x:Type Button}">
+            <Grid>
+                <VisualStateManager.VisualStateGroups>
+                    <VisualStateGroup x:Name="CommonStates">
+                        <VisualState x:Name="Normal">
+                            <Storyboard>
+                                <ColorAnimationUsingKeyFrames Storyboard.TargetProperty="(Panel.Background).(SolidColorBrush.Color)" Storyboard.TargetName="borderSync">
+                                    <EasingColorKeyFrame KeyTime="0" Value="#FF292F37"/>
+                                </ColorAnimationUsingKeyFrames>
+                            </Storyboard>
+                        </VisualState>
+                        <VisualState x:Name="MouseOver">
+                            <Storyboard>
+                                <ColorAnimationUsingKeyFrames Storyboard.TargetProperty="(Panel.Background).(SolidColorBrush.Color)" Storyboard.TargetName="borderSync">
+                                    <EasingColorKeyFrame KeyTime="0" Value="#FF555960"/>
+                                </ColorAnimationUsingKeyFrames>
+                            </Storyboard>
+                        </VisualState>
+                        <VisualState x:Name="Pressed">
+                            <Storyboard>
+                                <ColorAnimationUsingKeyFrames Storyboard.TargetProperty="(Panel.Background).(SolidColorBrush.Color)" Storyboard.TargetName="borderSync">
+                                    <EasingColorKeyFrame KeyTime="0" Value="#FF292F37"/>
+                                </ColorAnimationUsingKeyFrames>
+                            </Storyboard>
+                        </VisualState>
+                        <VisualState x:Name="Disabled"/>
+                    </VisualStateGroup>
+                </VisualStateManager.VisualStateGroups>
+                <Border x:Name="borderSync" CornerRadius="19" Background="#FF292F37" >
+                    <Grid>
+                        <Rectangle x:Name="SyncIco" Width="22" Height="22" HorizontalAlignment="Left" Margin="7.5,0,0,0">
+                            <Rectangle.Fill>
+                                <ImageBrush ImageSource="/Resources/IconProgres.png" Stretch="Uniform"/>
+                            </Rectangle.Fill>
+                        </Rectangle>
+                        <ContentPresenter x:Name="contentPresenterSync" Focusable="False" HorizontalAlignment="{TemplateBinding HorizontalContentAlignment}" Margin="41,0,0,0" RecognizesAccessKey="True" SnapsToDevicePixels="{TemplateBinding SnapsToDevicePixels}" VerticalAlignment="{TemplateBinding VerticalContentAlignment}"/>
+                    </Grid>
+                </Border>
+            </Grid>
+        </ControlTemplate>
+
+        <!--<Style x:Key="LVItemStyle" TargetType="{x:Type ListViewItem}">
+            <Style.Resources>
+                <namespc:BackgroundConverter x:Key="myConverter" />
+            </Style.Resources>
+            <Setter Property="Background">
+                <Setter.Value>
+                    <Binding RelativeSource="{RelativeSource Self}" Converter="{StaticResource myConverter}"/>
+                </Setter.Value>
+            </Setter>
+        </Style>-->
+
+       
+
+    </Window.Resources>
+    <Window.Triggers>
+        <EventTrigger RoutedEvent="ButtonBase.Click" SourceName="ButtonOpenMenu">
+            <BeginStoryboard Storyboard="{StaticResource OpenMenu}"/>
+            <BeginStoryboard Storyboard="{StaticResource ShowLogo}"/>
+        </EventTrigger>
+        <EventTrigger RoutedEvent="ButtonBase.Click" SourceName="ButtonCloseMenu">
+            <BeginStoryboard Storyboard="{StaticResource CloseMenu}"/>
+            <BeginStoryboard Storyboard="{StaticResource HideLogo}"/>
+        </EventTrigger>
+    </Window.Triggers>
+    <Grid x:Name="MainGrid">
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition Width="225" Name="GridMenuLeft"/>
+            <ColumnDefinition Width="*"/>
+        </Grid.ColumnDefinitions>
+
+        <!--#region MenuLeft-->
+        <Grid x:Name="MenuLeft" Background="#FF1B2133">
+            <!--<Grid.Effect>
+                <DropShadowEffect BlurRadius="2" ShadowDepth="1" Color="#FF000000"/>
+            </Grid.Effect>-->
+            <Grid.RowDefinitions>
+                <RowDefinition Height="80"/>
+                <RowDefinition Height="110"/>
+                <RowDefinition Height="*"/>
+            </Grid.RowDefinitions>
+
+            <!--Logo & Btn-->
+            <Grid>
+                <Rectangle x:Name="MMFLogo" Width="127" HorizontalAlignment="Left" Margin="25, 0, 0, 0">
+                    <Rectangle.Fill>
+                        <ImageBrush ImageSource="/Resources/MMFLogo.png" Stretch="Uniform"/>
+                    </Rectangle.Fill>
+                </Rectangle>
+                <Button Command="{Binding CloseMenuCommand}" CommandParameter="{Binding ElementName=MainGrid}" Visibility="{Binding ButtonCloseMenuVisibility}" x:Name="ButtonCloseMenu" Height="30" Width="30" Margin="0,0,18,0" HorizontalAlignment="Right" VerticalAlignment="Center" Style="{StaticResource MaterialDesignFloatingActionMiniAccentButton}" Background="{x:Null}" BorderBrush="{x:Null}" Foreground="#FFDEDEDE" >
+                    <materialDesign:PackIcon Kind="Menu" Width="25" Height="25"/>
+                </Button>
+                <Button  Command="{Binding OpenMenuCommand}" CommandParameter="{Binding ElementName=MainGrid}" Visibility="{Binding ButtonOpenMenuVisibility}" x:Name="ButtonOpenMenu" Height="30" Width="30" Margin="0" HorizontalAlignment="Center" VerticalAlignment="Center" Style="{StaticResource MaterialDesignFloatingActionMiniAccentButton}" Background="{x:Null}" BorderBrush="{x:Null}" Foreground="#FFDEDEDE">
+                    <materialDesign:PackIcon Kind="Menu" Width="25" Height="25"/>
+                </Button>
+            </Grid>
+
+            <!--Img & Name-->
+            <Grid Grid.Row="1">
+                <Rectangle Width="1" Fill="#171a20" HorizontalAlignment="Right"/>
+                <Ellipse x:Name="UserImg" Width="60" Height="60" HorizontalAlignment="Left" Margin="25" VerticalAlignment="Center" Fill="#FFDEDEDE"/>
+                <Label x:Name="UserName" Content="Packard Bell" Width="100" Height="20" HorizontalAlignment="Right" VerticalAlignment="Center" Margin="0,0,18,0" Foreground="#FFDEDEDE" FontSize="14" FontWeight="Medium" Padding="0" HorizontalContentAlignment="Center"/>
+            </Grid>
+
+            <!--Menu-->
+            <Grid Grid.Row="2">
+                <Rectangle Width="1" Fill="#171a20" HorizontalAlignment="Right"/>
+                <StackPanel>
+
+                    <!--#region MenuLeft Menu-->
+                    <CheckBox x:Name="ChBMenu" Content="MENU" Height="40" Foreground="#515974" FontWeight="Light" FontSize="14" VerticalAlignment="Top" HorizontalContentAlignment="Left" Margin="0,0,0,0" Template="{DynamicResource ChBMenuLeft}" IsChecked="True"/>
+                    <StackPanel x:Name="SPMenu" Orientation="Vertical" Margin="0">
+                        <RadioButton Content="WareHouses" HorizontalContentAlignment="Left" VerticalContentAlignment="Center" Foreground="#FFDEDEDE" GroupName="MenuLeftRB" VerticalAlignment="Top" Margin="0" Height="43" Style="{StaticResource RBStyleMenuLeft}" BorderBrush="{x:Null}" Checked="RadioButton_Checked">
+                            <RadioButton.Background>
+                                <ImageBrush ImageSource="/Resources/IconWareHouse.png" Stretch="Uniform"/>
+                            </RadioButton.Background>
+                        </RadioButton>
+                        <RadioButton Content="Income" HorizontalContentAlignment="Left" VerticalContentAlignment="Center" Foreground="#FFDEDEDE" GroupName="MenuLeftRB" VerticalAlignment="Top" Margin="0" Height="43" Style="{StaticResource RBStyleMenuLeft}">
+                            <RadioButton.Background>
+                                <ImageBrush ImageSource="/Resources/IconIncome.png" Stretch="Uniform"/>
+                            </RadioButton.Background>
+                        </RadioButton>
+                        <RadioButton Content="Realization" HorizontalContentAlignment="Left" VerticalContentAlignment="Center" Foreground="#FFDEDEDE" GroupName="MenuLeftRB" VerticalAlignment="Top" Margin="0" Height="43" Style="{StaticResource RBStyleMenuLeft}">
+                            <RadioButton.Background>
+                                <ImageBrush ImageSource="/Resources/IconRealization.png" Stretch="Uniform"/>
+                            </RadioButton.Background>
+                        </RadioButton>
+                        <RadioButton Content="Return" HorizontalContentAlignment="Left" VerticalContentAlignment="Center" Foreground="#FFDEDEDE" GroupName="MenuLeftRB" VerticalAlignment="Top" Margin="0" Height="43" Style="{StaticResource RBStyleMenuLeft}">
+                            <RadioButton.Background>
+                                <ImageBrush ImageSource="/Resources/IconReturns.png" Stretch="Uniform"/>
+                            </RadioButton.Background>
+                        </RadioButton>
+                        <StackPanel.Style>
+                            <Style TargetType="StackPanel">
+                                <Style.Triggers>
+                                    <DataTrigger Binding="{Binding ElementName=ChBMenu, Path=IsChecked}" Value="False">
+                                        <DataTrigger.EnterActions>
+                                            <BeginStoryboard>
+                                                <Storyboard>
+                                                    <DoubleAnimationUsingKeyFrames Storyboard.TargetProperty="(FrameworkElement.Height)">
+                                                        <EasingDoubleKeyFrame KeyTime="0" Value="172"/>
+                                                        <EasingDoubleKeyFrame KeyTime="0:0:0.3" Value="0"/>
+                                                    </DoubleAnimationUsingKeyFrames>
+                                                </Storyboard>
+                                            </BeginStoryboard>
+                                        </DataTrigger.EnterActions>
+                                        <DataTrigger.ExitActions>
+                                            <BeginStoryboard>
+                                                <Storyboard>
+                                                    <DoubleAnimationUsingKeyFrames Storyboard.TargetProperty="(FrameworkElement.Height)">
+                                                        <EasingDoubleKeyFrame KeyTime="0" Value="0"/>
+                                                        <EasingDoubleKeyFrame KeyTime="0:0:0.3" Value="172"/>
+                                                    </DoubleAnimationUsingKeyFrames>
+                                                </Storyboard>
+                                            </BeginStoryboard>
+                                        </DataTrigger.ExitActions>
+                                    </DataTrigger>
+                                </Style.Triggers>
+                            </Style>
+                        </StackPanel.Style>
+                    </StackPanel>
+                    <!--#endregion MenuLeft Menu-->
+
+                    <!--#region MenuLeft More-->
+                    <CheckBox x:Name="ChBMore" Content="MORE" Height="40" Foreground="#515974" FontWeight="Light" FontSize="14" VerticalAlignment="Top" HorizontalContentAlignment="Left" Margin="0,0,0,0" Template="{DynamicResource ChBMenuLeft}" IsChecked="True"/>
+                    <StackPanel>
+                        <RadioButton Content="Delivers" HorizontalContentAlignment="Left" VerticalContentAlignment="Center" Foreground="#FFDEDEDE" GroupName="MenuLeftRB" VerticalAlignment="Top" Margin="0" Height="43" Style="{StaticResource RBStyleMenuLeft}">
+                            <RadioButton.Background>
+                                <ImageBrush ImageSource="/Resources/IconDelivers.png" Stretch="Uniform"/>
+                            </RadioButton.Background>
+                        </RadioButton>
+                        <RadioButton Content="Clients" HorizontalContentAlignment="Left" VerticalContentAlignment="Center" Foreground="#FFDEDEDE" GroupName="MenuLeftRB" VerticalAlignment="Top" Margin="0" Height="43" Style="{StaticResource RBStyleMenuLeft}">
+                            <RadioButton.Background>
+                                <ImageBrush ImageSource="/Resources/IconClients.png" Stretch="Uniform"/>
+                            </RadioButton.Background>
+                        </RadioButton>
+                        <RadioButton Content="Expenses" HorizontalContentAlignment="Left" VerticalContentAlignment="Center" Foreground="#FFDEDEDE" GroupName="MenuLeftRB" VerticalAlignment="Top" Margin="0" Height="43" Style="{StaticResource RBStyleMenuLeft}">
+                            <RadioButton.Background>
+                                <ImageBrush ImageSource="/Resources/IconExpenses.png" Stretch="Uniform"/>
+                            </RadioButton.Background>
+                        </RadioButton>
+                        <StackPanel.Style>
+                            <Style TargetType="StackPanel">
+                                <Style.Triggers>
+                                    <DataTrigger Binding="{Binding ElementName=ChBMore, Path=IsChecked}" Value="False">
+                                        <DataTrigger.EnterActions>
+                                            <BeginStoryboard>
+                                                <Storyboard>
+                                                    <DoubleAnimationUsingKeyFrames Storyboard.TargetProperty="(FrameworkElement.Height)">
+                                                        <EasingDoubleKeyFrame KeyTime="0" Value="129"/>
+                                                        <EasingDoubleKeyFrame KeyTime="0:0:0.3" Value="0"/>
+                                                    </DoubleAnimationUsingKeyFrames>
+                                                </Storyboard>
+                                            </BeginStoryboard>
+                                        </DataTrigger.EnterActions>
+                                        <DataTrigger.ExitActions>
+                                            <BeginStoryboard>
+                                                <Storyboard>
+                                                    <DoubleAnimationUsingKeyFrames Storyboard.TargetProperty="(FrameworkElement.Height)">
+                                                        <EasingDoubleKeyFrame KeyTime="0" Value="0"/>
+                                                        <EasingDoubleKeyFrame KeyTime="0:0:0.3" Value="129"/>
+                                                    </DoubleAnimationUsingKeyFrames>
+                                                </Storyboard>
+                                            </BeginStoryboard>
+                                        </DataTrigger.ExitActions>
+                                    </DataTrigger>
+                                </Style.Triggers>
+                            </Style>
+                        </StackPanel.Style>
+                    </StackPanel>
+                    <!--#endregion MenuLeft More-->
+
+                </StackPanel>
+
+                <!--Synchronization-->
+                <Button Command="{Binding SendRequestCommand}" x:Name="BTNSync" Content="Синхронизация" Margin="0,0,0,20" HorizontalContentAlignment="Left" VerticalAlignment="Bottom"  Width="147" Height="37" Template="{StaticResource BtnSync}" FontSize="13" FontWeight="Normal"/>
+
+            </Grid>
+        </Grid>
+        <!--#endregion MenuLeft-->
+
+        <!--#region Main-->
+        <Grid Grid.Column="1">
+            <Grid.RowDefinitions>
+                <RowDefinition Height="80"/>
+                <RowDefinition Height="*"/>
+                <RowDefinition Height="70"/>
+            </Grid.RowDefinitions>
+
+            <!--#region MenuTop-->
+            <Grid>
+                <Border BorderBrush="#171a20" BorderThickness="0,0,0,1">
+                    <Border.Background>
+                        <LinearGradientBrush EndPoint="0.5,1" StartPoint="0.5,0">
+                            <LinearGradientBrush.RelativeTransform>
+                                <TransformGroup>
+                                    <ScaleTransform CenterY="0.5" CenterX="0.5"/>
+                                    <SkewTransform CenterY="0.5" CenterX="0.5"/>
+                                    <RotateTransform Angle="-90" CenterY="0.5" CenterX="0.5"/>
+                                    <TranslateTransform/>
+                                </TransformGroup>
+                            </LinearGradientBrush.RelativeTransform>
+                            <GradientStop Color="#FF1B2133" Offset="0"/>
+                            <GradientStop Color="#FF292F37" Offset="1"/>
+                        </LinearGradientBrush>
+                    </Border.Background>
+                    <Grid>
+                        <Grid.ColumnDefinitions>
+                            <ColumnDefinition Width="50"/>
+                            <ColumnDefinition Width="*"/>
+                            <ColumnDefinition Width="160"/>
+                        </Grid.ColumnDefinitions>
+                        <Rectangle Width="20" Height="20" VerticalAlignment="Center" HorizontalAlignment="Center">
+                            <Rectangle.Fill>
+                                <ImageBrush ImageSource="/Resources/IconSearch.png" Stretch="Uniform"/>
+                            </Rectangle.Fill>
+                        </Rectangle>
+                        <localCtrl:AutoCompleteTextBox Style="{DynamicResource AutoCompleteTextBoxStyle1}"  Grid.Column="1" Height="35" Watermark=" Search ..." 
+                                                       BorderBrush="{x:Null}" Foreground="#FFFFFFFF" 
+                                                       SuggestionBackground="White" FontSize="14" x:Name="Actb"
+                                                       Provider="{StaticResource Provider}"
+                                                       ItemTemplate="{StaticResource ResourceKey=StateTemplate}"
+                                                       DisplayMember="Title"                                                  
+                                                       IsDropDownOpen="{Binding IsDropDownOpen,Mode=TwoWay,UpdateSourceTrigger=PropertyChanged}"
+                                                       LoadingContent="Загрузка..."
+                                                       Text="{Binding SearchingText,Mode=TwoWay,UpdateSourceTrigger=PropertyChanged}">
+
+                            <localCtrl:AutoCompleteTextBox.SelectedItem >
+                                <Binding Path="SelectedItem" Mode="TwoWay" UpdateSourceTrigger="PropertyChanged" >
+                                </Binding>
+                            </localCtrl:AutoCompleteTextBox.SelectedItem>
+                            <i:Interaction.Triggers>
+                                <i:EventTrigger EventName="PreviewKeyDown">
+                                    <prism:InvokeCommandAction 
+                                        Command="{Binding PreviewKeyDownCommand}"/>
+                                </i:EventTrigger>
+                            </i:Interaction.Triggers>
+                        </localCtrl:AutoCompleteTextBox>
+
+                        <StackPanel Grid.Column="2" Orientation="Horizontal">
+
+                            <Button x:Name="BtnNotification"  Margin="18,0,10,0" Height="30" Width="30" HorizontalAlignment="Right" VerticalAlignment="Center" Style="{StaticResource MaterialDesignFloatingActionMiniAccentButton}" Background="{x:Null}" BorderBrush="{x:Null}" Foreground="#FFDEDEDE">
+                                <Rectangle Width="26" Height="26" Margin="0">
+                                    <Rectangle.Fill>
+                                        <ImageBrush ImageSource="/Resources/IconNotification.png" Stretch="Uniform"/>
+                                    </Rectangle.Fill>
+                                </Rectangle>
+                            </Button>
+
+                            <Button x:Name="BtnLoggin" Height="30" Width="30" Margin="10,0,10,0" HorizontalAlignment="Right" VerticalAlignment="Center" Style="{StaticResource MaterialDesignFloatingActionMiniAccentButton}" Background="{x:Null}" BorderBrush="{x:Null}" Foreground="#FFDEDEDE">
+                                <Rectangle Width="26" Height="26" Margin="0">
+                                    <Rectangle.Fill>
+                                        <ImageBrush ImageSource="/Resources/IconLoggin.png" Stretch="Uniform"/>
+                                    </Rectangle.Fill>
+                                </Rectangle>
+                            </Button>
+
+                            <Button x:Name="BtnSetting" Height="30" Width="30" Margin="10,0,14,0" HorizontalAlignment="Right" VerticalAlignment="Center" Style="{StaticResource MaterialDesignFloatingActionMiniAccentButton}" Background="{x:Null}" BorderBrush="{x:Null}" Foreground="#FFDEDEDE">
+                                <Rectangle Width="26" Height="26" Margin="0">
+                                    <Rectangle.Fill>
+                                        <ImageBrush ImageSource="/Resources/IconSetting.png" Stretch="Uniform"/>
+                                    </Rectangle.Fill>
+                                </Rectangle>
+                            </Button>
+                        </StackPanel>
+                    </Grid>
+                </Border>
+            </Grid>
+            <!--#endregion MenuTop-->
+
+            <!--#region Data-->
+            <Grid x:Name="GridPrincipal" Grid.Row="1" Background="#FF292F37">
+                <!--<ListView x:Name="listView"  behaviours:GridViewColumnResize.Enabled="True" ItemContainerStyle="{StaticResource LVItemStyle}" HorizontalContentAlignment="Stretch">
+                    <ListView.View>
+                        <GridView ScrollViewer.VerticalScrollBarVisibility="Auto">
+                            <GridViewColumn behaviours:GridViewColumnResize.Width="*" Header="Name" HeaderContainerStyle="{DynamicResource OrderGridViewColumnHeaderStyle}" Width="Auto" DisplayMemberBinding="{Binding Name}"/>
+                            <GridViewColumn behaviours:GridViewColumnResize.Width="*" Header="Amount" HeaderContainerStyle="{DynamicResource OrderGridViewColumnHeaderStyle}" Width="Auto" DisplayMemberBinding="{Binding Amount}"/>
+                            --><!--<GridViewColumn Header="" HeaderContainerStyle="{DynamicResource OrderGridViewColumnHeaderStyle}" Width="Auto" DisplayMemberBinding="{Binding Edit}" FrameworkElement.FlowDirection="RightToLeft"/>--><!--
+                            <GridViewColumn Header="Edit" HeaderContainerStyle="{DynamicResource OrderGridViewColumnHeaderStyle}" Width="160" DisplayMemberBinding="{Binding Edit}">
+                                <GridViewColumn.CellTemplate>
+                                    <DataTemplate>
+                                        <Button Content="" HorizontalAlignment="Right" Height="45" Margin="0,0,0,0" VerticalAlignment="Center" Width="45" />
+                                    </DataTemplate>
+                                </GridViewColumn.CellTemplate>
+                            </GridViewColumn>
+                        </GridView>
+                    </ListView.View>
+                </ListView>-->
+            </Grid>
+            <!--#endregion Data-->
+            
+            <!--#region MenuBottom-->
+            <Border Grid.Row="2" BorderBrush="#171a20" BorderThickness="0,1,0,0" Background="#FF292F37">
+                <StackPanel>
+                    
+                </StackPanel>
+            </Border>
+            <!--#endregion MenuBottom-->
+        </Grid>
+        <!--#endregion Main-->
+    </Grid>
+</Window>
