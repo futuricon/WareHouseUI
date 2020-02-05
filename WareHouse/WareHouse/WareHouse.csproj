@@ -12,6 +12,7 @@
     <None Remove="Resources\IconAddNew.png" />
     <None Remove="Resources\IconArrow.png" />
     <None Remove="Resources\IconClients.png" />
+    <None Remove="Resources\IconCloseX.png" />
     <None Remove="Resources\IconDelete.png" />
     <None Remove="Resources\IconDelivers.png" />
     <None Remove="Resources\IconEdit.png" />
@@ -55,16 +56,11 @@
   </ItemGroup>
 
   <ItemGroup>
-    <Reference Include="WpfControls">
-      <HintPath>bin\Debug\netcoreapp3.1\WpfControls.dll</HintPath>
-    </Reference>
-  </ItemGroup>
-
-  <ItemGroup>
     <Resource Include="Resources\DSLogoGreen.png" />
     <Resource Include="Resources\IconAddNew.png" />
     <Resource Include="Resources\IconArrow.png" />
     <Resource Include="Resources\IconClients.png" />
+    <Resource Include="Resources\IconCloseX.png" />
     <Resource Include="Resources\IconDelete.png" />
     <Resource Include="Resources\IconDelivers.png" />
     <Resource Include="Resources\IconEdit.png" />
@@ -84,7 +80,9 @@
   </ItemGroup>
 
   <ItemGroup>
-    <Folder Include="Behaviours\" />
+    <Reference Include="WpfControls">
+      <HintPath>bin\Debug\netcoreapp3.1\WpfControls.dll</HintPath>
+    </Reference>
   </ItemGroup>
 
 </Project>

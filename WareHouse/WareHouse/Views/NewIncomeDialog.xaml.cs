@@ -51,5 +51,6 @@ namespace WareHouse.Views
                 new TestNewIncome(1, "Test Name", 5056451, 555, "TestName1" )
             };
         }
+
     }
 }
