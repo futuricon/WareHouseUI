@@ -361,14 +361,14 @@
                     <VisualState x:Name="Disabled"/>
                 </VisualStateGroup>
             </VisualStateManager.VisualStateGroups>
-            <Border x:Name="borderNew" CornerRadius="19" Background="#FF292F37">
+            <Border x:Name="borderNew" CornerRadius="19" Width="auto" Background="#FF292F37">
                 <Grid>
                     <Rectangle x:Name="NewIco" Width="18" Height="18" HorizontalAlignment="Left" Margin="7.5,0,0,0">
                         <Rectangle.Fill>
                             <ImageBrush ImageSource="/Resources/IconAddNew.png" Stretch="Uniform"/>
                         </Rectangle.Fill>
                     </Rectangle>
-                    <ContentPresenter x:Name="contentPresenterNew" Focusable="False" HorizontalAlignment="{TemplateBinding HorizontalContentAlignment}" Margin="41,0,0,0" RecognizesAccessKey="True" SnapsToDevicePixels="{TemplateBinding SnapsToDevicePixels}" VerticalAlignment="{TemplateBinding VerticalContentAlignment}"/>
+                    <ContentPresenter x:Name="contentPresenterNew" Focusable="False" HorizontalAlignment="Center" Margin="35,0,10,0" RecognizesAccessKey="True" SnapsToDevicePixels="{TemplateBinding SnapsToDevicePixels}" VerticalAlignment="{TemplateBinding VerticalContentAlignment}"/>
                 </Grid>
             </Border>
         </Grid>

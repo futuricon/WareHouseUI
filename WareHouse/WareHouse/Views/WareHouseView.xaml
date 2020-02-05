@@ -84,8 +84,8 @@
                             <DataTemplate>
                                 <Grid>
                                     <Rectangle Width="1" Height="50" Fill="#171a20" HorizontalAlignment="Left" Margin="-6,-7,0,-7"/>
-                                    <StackPanel Orientation="Horizontal" Margin="2,5,0,5">
-                                        <Border Margin="0" Width="20" Height="20" CornerRadius="100" Background="#FFE0E0E0">
+                                    <StackPanel Orientation="Horizontal" Margin="2,5,0,5" >
+                                        <!--<Border Margin="0" Width="20" Height="20" CornerRadius="100" Background="#FFE0E0E0">
                                             <Ellipse Margin="0" Width="10" Height="10" HorizontalAlignment="Center" VerticalAlignment="Center">
                                                 <Ellipse.Style>
                                                     <Style TargetType="Ellipse">
@@ -98,22 +98,22 @@
                                                     </Style>
                                                 </Ellipse.Style>
                                             </Ellipse>
-                                        </Border>
-                                        <Button Content="" Margin="7,0,0,0" HorizontalAlignment="Right" Height="35" VerticalAlignment="Center" Width="35" BorderBrush="#00000000" >
+                                        </Border>-->
+                                        <Button Content="" Margin="15,0,0,0" HorizontalAlignment="Stretch" Height="35" VerticalAlignment="Center" Width="35" BorderBrush="#00000000" >
                                             <Button.Background>
                                                 <ImageBrush ImageSource="/Resources/IconEdit.png" Stretch="Uniform"/>
                                             </Button.Background>
                                         </Button>
-                                        <Button Content="" Margin="7,0,0,0" HorizontalAlignment="Right" Height="35" VerticalAlignment="Center" Width="35" BorderBrush="#00000000" >
+                                        <Button Content="" Margin="20,0,0,0" HorizontalAlignment="Stretch" Height="35" VerticalAlignment="Center" Width="35" BorderBrush="#00000000" >
                                             <Button.Background>
                                                 <ImageBrush ImageSource="/Resources/IconView.png" Stretch="Uniform"/>
                                             </Button.Background>
                                         </Button>
-                                        <Button Content="" Margin="7,0,0,0" HorizontalAlignment="Right" Height="35" VerticalAlignment="Center" Width="35" BorderBrush="#00000000" >
+                                        <!--<Button Content="" Margin="7,0,0,0" HorizontalAlignment="Right" Height="35" VerticalAlignment="Center" Width="35" BorderBrush="#00000000" >
                                             <Button.Background>
                                                 <ImageBrush ImageSource="/Resources/IconDelete.png" Stretch="Uniform"/>
                                             </Button.Background>
-                                        </Button>
+                                        </Button>-->
                                     </StackPanel>
                                 </Grid>
                             </DataTemplate>

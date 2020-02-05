@@ -46,7 +46,7 @@ namespace WareHouse.Views
 					break;
 				case "Return":
 					GridPrincipal.Children.Clear();
-					GridPrincipal.Children.Add(new WareHouseView());
+					GridPrincipal.Children.Add(new NewIncomeDialog());
 					break;
 				case "Delivers":
 					GridPrincipal.Children.Clear();

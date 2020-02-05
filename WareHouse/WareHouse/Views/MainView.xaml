@@ -437,7 +437,7 @@
             <Grid.RowDefinitions>
                 <RowDefinition Height="80"/>
                 <RowDefinition Height="*"/>
-                <RowDefinition Height="75"/>
+                <!--<RowDefinition Height="75"/>-->
             </Grid.RowDefinitions>
 
             <!--#region MenuTop-->
@@ -463,7 +463,7 @@
                             <ColumnDefinition Width="*"/>
                             <ColumnDefinition Width="160"/>
                         </Grid.ColumnDefinitions>
-                        <Rectangle Width="20" Height="20" VerticalAlignment="Center" HorizontalAlignment="Center">
+                        <!--<Rectangle Width="20" Height="20" VerticalAlignment="Center" HorizontalAlignment="Center">
                             <Rectangle.Fill>
                                 <ImageBrush ImageSource="/Resources/IconSearch.png" Stretch="Uniform"/>
                             </Rectangle.Fill>
@@ -488,7 +488,12 @@
                                         Command="{Binding PreviewKeyDownCommand}"/>
                                 </i:EventTrigger>
                             </i:Interaction.Triggers>
-                        </localCtrl:AutoCompleteTextBox>
+                        </localCtrl:AutoCompleteTextBox>-->
+                        <Rectangle Grid.Column="1" Width="200" Height="48" HorizontalAlignment="Right" Margin="0,0,30,0">
+                            <Rectangle.Fill>
+                                <ImageBrush  Stretch="Uniform" ImageSource="/WareHouse;component/Resources/DSLogoGreen.png"/>
+                            </Rectangle.Fill>
+                        </Rectangle>
 
                         <StackPanel Grid.Column="2" Orientation="Horizontal">
 
@@ -528,9 +533,9 @@
             <!--#endregion Data-->
             
             <!--#region MenuBottom-->
-            <Border Grid.Row="2" BorderBrush="#171a20" BorderThickness="0,1,0,0" Background="#FF292F37">
+            <!--<Border Grid.Row="2" BorderBrush="#171a20" BorderThickness="0,1,0,0" Background="#FF292F37">
                 <Button Content="Add New" Template="{DynamicResource BtnStyleAddNew}" FontSize="13" FontWeight="Normal" Width="147" Height="37" HorizontalAlignment="Right" Margin="0,0,40,0"/>
-            </Border>
+            </Border>-->
             <!--#endregion MenuBottom-->
         </Grid>
         <!--#endregion Main-->
