@@ -19,50 +19,11 @@ namespace WareHouse.Views
 	/// Interaction logic for MainView.xaml
 	/// </summary>
 	public partial class MainView : Window
-	{
+	{	
 		public MainView()
 		{
 			InitializeComponent();
 		}
 
-
-		private void RadioButton_Click(object sender, RoutedEventArgs e)
-		{
-			RadioButton rb = (RadioButton)sender;
-
-			switch (rb.Content.ToString())
-			{
-				case "WareHouses":
-					GridPrincipal.Children.Clear();
-					GridPrincipal.Children.Add(new WareHouseView());
-					break;
-				case "Income":
-					GridPrincipal.Children.Clear();
-					GridPrincipal.Children.Add(new IncomeView());
-					break;
-				case "Realization":
-					GridPrincipal.Children.Clear();
-					GridPrincipal.Children.Add(new RealizationView());
-					break;
-				case "Return":
-					GridPrincipal.Children.Clear();
-					GridPrincipal.Children.Add(new NewIncomeDialog());
-					break;
-				case "Delivers":
-					GridPrincipal.Children.Clear();
-					GridPrincipal.Children.Add(new WareHouseView());
-					break;
-				case "Clients":
-					GridPrincipal.Children.Clear();
-					GridPrincipal.Children.Add(new WareHouseView());
-					break;
-				case "Expenses":
-					GridPrincipal.Children.Clear();
-					GridPrincipal.Children.Add(new ExpensesView());
-					break;
-				default:
-					break;
-			}
-		}
 	}
 }

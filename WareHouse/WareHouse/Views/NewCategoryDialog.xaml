@@ -1,0 +1,166 @@
+﻿<UserControl x:Class="WareHouse.Views.NewCategoryDialog"
+             xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+             xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
+             xmlns:localCtrl="http://wpfcontrols.com/"
+             xmlns:local="clr-namespace:WareHouse.Views"
+             xmlns:prism="http://prismlibrary.com/"
+             xmlns:behaviours="clr-namespace:WareHouse.Behaviours"
+             xmlns:j="clr-namespace:System.Windows.Interactivity;assembly=System.Windows.Interactivity"
+             xmlns:i="http://schemas.microsoft.com/expression/2010/interactivity"
+             prism:ViewModelLocator.AutoWireViewModel="True"
+             xmlns:materialDesign="http://materialdesigninxaml.net/winfx/xaml/themes"
+             mc:Ignorable="d" 
+             d:DesignHeight="550" d:DesignWidth="350">
+    <prism:Dialog.WindowStyle>
+        <Style TargetType="Window">
+            <Setter Property="prism:Dialog.WindowStartupLocation" Value="CenterScreen" />
+            <Setter Property="WindowStyle" Value="None"/>
+            <Setter Property="ResizeMode" Value="NoResize"/>
+            <Setter Property="ShowInTaskbar" Value="True"/>
+            <Setter Property="Background" Value="#FF292F37"/>
+            <Setter Property="Width" Value="350"/>
+            <Setter Property="Height" Value="550"/>
+        </Style>
+    </prism:Dialog.WindowStyle>
+    <UserControl.Resources>
+
+        <!--#region Style MD Theme Colors-->
+        <!-- primary -->
+        <SolidColorBrush x:Key="PrimaryHueLightBrush" Color="#FFFFFF"/>
+        <SolidColorBrush x:Key="PrimaryHueLightForegroundBrush" Color="#FFFFFF"/>
+        <SolidColorBrush x:Key="PrimaryHueMidBrush" Color="#FFFFFF"/>
+        <SolidColorBrush x:Key="PrimaryHueMidForegroundBrush" Color="#FFFFFF"/>
+        <SolidColorBrush x:Key="PrimaryHueDarkBrush" Color="Red"/>
+        <SolidColorBrush x:Key="PrimaryHueDarkForegroundBrush" Color="#FFE4E4E4"/>
+        <!-- accent -->
+        <SolidColorBrush x:Key="SecondaryAccentBrush" Color="#FFFFFF"/>
+        <SolidColorBrush x:Key="SecondaryAccentForegroundBrush" Color="#FFFFFF"/>
+        <!--#endregion Style MD Theme Colors-->
+
+    </UserControl.Resources>
+
+    <Grid>
+        <Border BorderBrush="#FF0F131B" BorderThickness="2" CornerRadius="30" Background="#FF1B2133">
+            <Grid>
+                <Grid.RowDefinitions>
+                    <RowDefinition Height="70"/>
+                    <RowDefinition Height="*"/>
+                    <RowDefinition Height="30"/>
+                </Grid.RowDefinitions>
+
+                <!--#region TopMenu-->
+                <Grid>
+                    <Label Content="Добавление Прихода" HorizontalAlignment="Center" Height="30" FontSize="15" FontWeight="Normal" Foreground="White"/>
+                    <Button Command="{Binding CloseDialogCancelCommand}" Style="{StaticResource MaterialDesignFloatingActionMiniAccentButton}"  Width="32" Height="32" HorizontalAlignment="Right" Margin="0,0,20,0" Background="#404955" BorderBrush="#404955">
+                        <Rectangle Width="20" Height="20">
+                            <Rectangle.Fill>
+                                <ImageBrush ImageSource="/Resources/IconCloseX.png" Stretch="Uniform"/>
+                            </Rectangle.Fill>
+                        </Rectangle>
+                    </Button>
+
+                    <Rectangle Height="2" Fill="#FF0F131B" VerticalAlignment="Bottom"/>
+                </Grid>
+                <!--#endregion TopMenu-->
+
+                <!--#region ListView-->
+                <Grid Grid.Row="1" Background="#FF292F37">
+                    <StackPanel>
+                        <Rectangle Fill="#292F37" Height="52"/>
+                        <Rectangle Fill="#404955" Height="46.5"/>
+                        <Rectangle Fill="#292F37" Height="46.5"/>
+                        <Rectangle Fill="#404955" Height="46.5"/>
+                        <Rectangle Fill="#292F37" Height="46.5"/>
+                        <Rectangle Fill="#404955" Height="46.5"/>
+                        <Rectangle Fill="#292F37" Height="46.5"/>
+                        <Rectangle Fill="#404955" Height="46.5"/>
+                    </StackPanel>
+                </Grid>
+                <Grid Grid.Row="1">
+                    <Grid.RowDefinitions>
+                        <RowDefinition Height="Auto"/>
+                        <RowDefinition Height="*"/>
+                    </Grid.RowDefinitions>
+                    
+                    <ListView x:Name="listView" MaxHeight="390"
+                              ItemsSource="{Binding CategoryCollection}"  
+                              behaviours:GridViewColumnResize.Enabled="True" 
+                              ItemContainerStyle="{StaticResource LVItemStyle}" 
+                              ScrollViewer.HorizontalScrollBarVisibility="Disabled"
+                              HorizontalContentAlignment="Stretch" Foreground="#DDF9F9F9" 
+                              Background="{x:Null}" BorderBrush="{x:Null}" 
+                              ScrollViewer.VerticalScrollBarVisibility="Visible" VerticalAlignment="Top">
+                        <ListView.View>
+                            <GridView>
+
+                                <!--#region PriceColumn-->
+                                <GridViewColumn behaviours:GridViewColumnResize.Width="*" Width="Auto" x:Name="TitleColumn" Header="Название" HeaderContainerStyle="{DynamicResource GridViewColumnHeaderStyle}">
+                                    <GridViewColumn.CellTemplate>
+                                        <DataTemplate>
+                                            <Border Width="{Binding ElementName=TitleColumn, Path=ActualWidth}" BorderBrush="#171a20" BorderThickness="1,0,0,0" Margin="-6,0,0,0">
+                                                <TextBox Text="{Binding Title}" Padding="10,0,0,0" Margin="0,5" HorizontalContentAlignment="Left" Foreground="#FFF0F0F0" VerticalAlignment="Center" Style="{DynamicResource TBStyleForLV}" CaretBrush="#F45B63"/>
+                                            </Border>
+                                        </DataTemplate>
+                                    </GridViewColumn.CellTemplate>
+                                </GridViewColumn>
+                                <!--#endregion PriceColumn-->
+
+                                <!--#region EditColumn-->
+                                <GridViewColumn Width="60" Header=".Редакт" HeaderContainerStyle="{DynamicResource GridViewColumnHeaderStyle}">
+                                    <GridViewColumn.CellTemplate>
+                                        <DataTemplate>
+                                            <Grid>
+                                                <Rectangle Width="1" Height="50" Fill="#171a20" HorizontalAlignment="Left" Margin="-6,-7,0,-7"/>
+                                                <StackPanel Orientation="Horizontal" Margin="2,5,0,5">
+                                                    <!--<Border Margin="0" Width="20" Height="20" CornerRadius="100" Background="#FFE0E0E0">
+                                                        <Ellipse Margin="0" Width="10" Height="10" HorizontalAlignment="Center" VerticalAlignment="Center">
+                                                            <Ellipse.Style>
+                                                                <Style TargetType="Ellipse">
+                                                                    <Setter Property="Fill" Value="#FF2BB618"/>
+                                                                    <Style.Triggers>
+                                                                        <DataTrigger Binding="{Binding Status}" Value="False">
+                                                                            <Setter Property="Fill" Value="#B61818" />
+                                                                        </DataTrigger>
+                                                                    </Style.Triggers>
+                                                                </Style>
+                                                            </Ellipse.Style>
+                                                        </Ellipse>
+                                                    </Border>-->
+                                                    <!--<Button Content="" Margin="7,0,0,0" HorizontalAlignment="Right" Height="35" VerticalAlignment="Center" Width="35" BorderBrush="#00000000" >
+                                                        <Button.Background>
+                                                            <ImageBrush ImageSource="/Resources/IconEdit.png" Stretch="Uniform"/>
+                                                        </Button.Background>
+                                                    </Button>-->
+                                                    <Button  Command="{Binding RelativeSource={RelativeSource AncestorType={x:Type ListView}}, Path=DataContext.DeleteCategoryCommand}" 
+                                                        CommandParameter="{Binding}" Margin="7,0,0,0" HorizontalAlignment="Right" Height="35" VerticalAlignment="Center" Width="35" BorderBrush="#00000000" >
+                                                        <Button.Background>
+                                                            <ImageBrush ImageSource="/Resources/IconDelete.png" Stretch="Uniform"/>
+                                                        </Button.Background>
+                                                    </Button>
+                                                </StackPanel>
+                                            </Grid>
+                                        </DataTemplate>
+                                    </GridViewColumn.CellTemplate>
+                                </GridViewColumn>
+                                <!--#endregion EditColumn-->
+
+                            </GridView>
+                        </ListView.View>
+                    </ListView>
+                    <Grid Grid.Row="1" VerticalAlignment="Stretch" Background="#FF292F37">
+                        <!--<Rectangle Height="2" Fill="#FF0F131B" VerticalAlignment="Top"/>-->
+                        <Button Command="{Binding AddToCollectionCommand}" VerticalAlignment="Top" HorizontalAlignment="Center" Template="{DynamicResource BtnStyleAddNew}" Content="Добавить" Margin="0,10,0,10"/>
+                    </Grid>
+                </Grid>
+                <!--#endregion ListView-->
+            </Grid>
+        </Border>
+        <i:Interaction.Triggers >
+            <i:EventTrigger EventName="PreviewKeyDown">
+                <prism:InvokeCommandAction Command="{Binding KeyUpEventCommand}" />
+            </i:EventTrigger>
+        </i:Interaction.Triggers>
+    </Grid>
+</UserControl>

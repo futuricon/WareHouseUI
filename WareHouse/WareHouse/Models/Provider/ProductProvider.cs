@@ -26,5 +26,19 @@ namespace WareHouse.Models.Provider
 				FilteredProducts;
 		}
 
+		public ProductProvider()
+		{
+			if (DesignerProperties.GetIsInDesignMode(new DependencyObject()))
+				return;
+			var repository = App.AppContainer.Resolve(typeof(IProductRepository)) as IProductRepository;
+			if (repository.GetAll().Any())
+			{
+				var products = repository.GetAll()
+					.GroupBy(x => x.Title)
+					.Select(x=>x.FirstOrDefault())
+					.ToList();
+				ListOfProducts = products;
+			}
+		}
 	}
 }

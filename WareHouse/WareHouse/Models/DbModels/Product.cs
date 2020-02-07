@@ -2,14 +2,18 @@
 using System;
 using System.Collections.Generic;
 using System.Text;
-
+using WareHouse.Models.Infrastructure;
 namespace WareHouse.Models.DbModels
 {
-	public class Product
-	{
+    public class Product : NotifyChangedPropertyBase, IEntity
+    {
+        private WareHouseTable wareHouse;
+        private Category category;
+
         public Product()
         {
-            Incomes = new List<Income>();
+            IncomeItems = new List<IncomeItem>();
+            OrderItems = new List<OrderItem>();
         }
         public int Id { get; set; }
         public string Title { get; set; }
@@ -25,14 +29,17 @@ namespace WareHouse.Models.DbModels
         [JsonProperty(PropertyName = "changed_date")]
         public DateTime ChangedDate { get; set; }
         [JsonProperty(PropertyName = "last_sync")]
-        public DateTime LastSync { get; set; }
+        public DateTime? LastSync { get; set; }
 
         public int CategoryId { get; set; }
-        public Category Category { get; set; }
+        public Category Category { get => category; set { 
+                category = value; OnPropertyChanged();
+            } }
 
         public int WareHouseId { get; set; }
-        public WareHouseTable WareHouse { get; set; }
+        public WareHouseTable WareHouse { get => wareHouse; set { wareHouse = value; OnPropertyChanged(); } }
 
-        public ICollection<Income> Incomes { get; set; }
+        public ICollection<IncomeItem> IncomeItems { get; set; }
+        public ICollection<OrderItem> OrderItems { get; set; }
     }
 }

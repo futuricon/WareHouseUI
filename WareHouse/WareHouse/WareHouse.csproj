@@ -7,12 +7,31 @@
   </PropertyGroup>
 
   <ItemGroup>
+    <Compile Remove="bin\**" />
+    <Compile Remove="Provider\**" />
+    <EmbeddedResource Remove="bin\**" />
+    <EmbeddedResource Remove="Provider\**" />
+    <None Remove="bin\**" />
+    <None Remove="Provider\**" />
+    <Page Remove="bin\**" />
+    <Page Remove="Provider\**" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <Compile Remove="Dialogs\ClientDialogViewModel.cs" />
+    <Compile Remove="Dialogs\DeliverDialogViewModel.cs" />
+    <Compile Remove="Models\DbModels\IncomeItemIncome.cs" />
+    <Compile Remove="Models\DbModels\OrderItemOrder.cs" />
+  </ItemGroup>
+
+  <ItemGroup>
     <None Remove="Resources\Arrow.png" />
     <None Remove="Resources\DSLogoGreen.png" />
     <None Remove="Resources\IconAddNew.png" />
     <None Remove="Resources\IconArrow.png" />
     <None Remove="Resources\IconClients.png" />
     <None Remove="Resources\IconCloseX.png" />
+    <None Remove="Resources\IconDel.png" />
     <None Remove="Resources\IconDelete.png" />
     <None Remove="Resources\IconDelivers.png" />
     <None Remove="Resources\IconEdit.png" />
@@ -21,18 +40,26 @@
     <None Remove="Resources\IconIncome.png" />
     <None Remove="Resources\IconLoggin.png" />
     <None Remove="Resources\IconNotification.png" />
+    <None Remove="Resources\IconProduct.png" />
     <None Remove="Resources\IconProgres.png" />
     <None Remove="Resources\IconRealization.png" />
+    <None Remove="Resources\IconRedact.png" />
     <None Remove="Resources\IconReturns.png" />
     <None Remove="Resources\IconSearch.png" />
     <None Remove="Resources\IconSetting.png" />
     <None Remove="Resources\IconView.png" />
     <None Remove="Resources\IconWareHouse.png" />
     <None Remove="Resources\MMFLogo.png" />
-    <None Remove="Views\MMFLogoBig.png" />
+    <None Remove="Resources\MMFLogoBig.png" />
   </ItemGroup>
 
   <ItemGroup>
+    <Resource Include="Resources\DSLogoGreen.png" />
+    <Resource Include="Resources\IconAddNew.png" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <PackageReference Include="Extended.Wpf.Toolkit" Version="3.8.0" />
     <PackageReference Include="MaterialDesignThemes" Version="3.0.1" />
     <PackageReference Include="Microsoft.EntityFrameworkCore" Version="3.1.1" />
     <PackageReference Include="Microsoft.EntityFrameworkCore.Design" Version="3.1.1">
@@ -56,11 +83,16 @@
   </ItemGroup>
 
   <ItemGroup>
-    <Resource Include="Resources\DSLogoGreen.png" />
-    <Resource Include="Resources\IconAddNew.png" />
+    <Reference Include="WpfControls">
+      <HintPath>bin\Debug\netcoreapp3.1\WpfControls.dll</HintPath>
+    </Reference>
+  </ItemGroup>
+
+  <ItemGroup>
     <Resource Include="Resources\IconArrow.png" />
     <Resource Include="Resources\IconClients.png" />
     <Resource Include="Resources\IconCloseX.png" />
+    <Resource Include="Resources\IconDel.png" />
     <Resource Include="Resources\IconDelete.png" />
     <Resource Include="Resources\IconDelivers.png" />
     <Resource Include="Resources\IconEdit.png" />
@@ -68,8 +100,10 @@
     <Resource Include="Resources\IconIncome.png" />
     <Resource Include="Resources\IconLoggin.png" />
     <Resource Include="Resources\IconNotification.png" />
+    <Resource Include="Resources\IconProduct.png" />
     <Resource Include="Resources\IconProgres.png" />
     <Resource Include="Resources\IconRealization.png" />
+    <Resource Include="Resources\IconRedact.png" />
     <Resource Include="Resources\IconReturns.png" />
     <Resource Include="Resources\IconSearch.png" />
     <Resource Include="Resources\IconSetting.png" />
@@ -77,12 +111,6 @@
     <Resource Include="Resources\IconWareHouse.png" />
     <Resource Include="Resources\MMFLogo.png" />
     <Resource Include="Resources\MMFLogoBig.png" />
-  </ItemGroup>
-
-  <ItemGroup>
-    <Reference Include="WpfControls">
-      <HintPath>bin\Debug\netcoreapp3.1\WpfControls.dll</HintPath>
-    </Reference>
   </ItemGroup>
 
 </Project>

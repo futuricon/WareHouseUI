@@ -1,0 +1,121 @@
+﻿<UserControl x:Class="WareHouse.Views.ReturnView"
+             xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+             xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
+             xmlns:local="clr-namespace:WareHouse.Views"
+             xmlns:behaviours="clr-namespace:WareHouse.Behaviours"
+             xmlns:prism="http://prismlibrary.com/"
+             mc:Ignorable="d" 
+             prism:ViewModelLocator.AutoWireViewModel="True"
+             d:DesignHeight="450" d:DesignWidth="800">
+    <UserControl.Resources>
+        <!--There ware Styles for List View-->
+    </UserControl.Resources>
+
+    <Grid Background="#FF292F37">
+        <Grid.RowDefinitions>
+            <RowDefinition Height="*"/>
+            <RowDefinition Height="75"/>
+        </Grid.RowDefinitions>
+
+        <ListView x:Name="listView" ItemsSource="{Binding RealizationCollection}" 
+                  behaviours:GridViewColumnResize.Enabled="True" 
+                  ItemContainerStyle="{StaticResource LVItemStyle}" 
+                  ScrollViewer.HorizontalScrollBarVisibility="Disabled" 
+                  ScrollViewer.VerticalScrollBarVisibility="Visible" 
+                  HorizontalContentAlignment="Stretch" Foreground="#DDF9F9F9" 
+                  Background="{x:Null}" BorderBrush="{x:Null}">
+            <ListView.View>
+                <GridView>
+
+                    <GridViewColumn behaviours:GridViewColumnResize.Width="*" Width="Auto" Header="Client" HeaderContainerStyle="{DynamicResource GridViewColumnHeaderStyle}" >
+                        <GridViewColumn.CellTemplate>
+                            <DataTemplate>
+                                <Border BorderBrush="#171a20" BorderThickness="1,0,0,0" Margin="-6,-23,0,-23">
+                                    <Label Content="{Binding Client.FIO}" Padding="10,0,0,0" Margin="0" HorizontalContentAlignment="Left" Foreground="#FFF0F0F0" VerticalAlignment="Center"/>
+                                </Border>
+                            </DataTemplate>
+                        </GridViewColumn.CellTemplate>
+                    </GridViewColumn>
+
+                    <GridViewColumn Width="120" Header="Date" HeaderContainerStyle="{DynamicResource GridViewColumnHeaderStyle}">
+                        <GridViewColumn.CellTemplate>
+                            <DataTemplate>
+                                <Border BorderBrush="#171a20" BorderThickness="1,0,0,0" Margin="-6,-23,0,-23">
+                                    <Label Content="{Binding Date}" Padding="10,0,0,0" Margin="0" HorizontalContentAlignment="Left" Foreground="#FFF0F0F0" VerticalAlignment="Center"/>
+                                </Border>
+                            </DataTemplate>
+                        </GridViewColumn.CellTemplate>
+                    </GridViewColumn>
+
+                    <GridViewColumn Width="100" Header="Quantity" HeaderContainerStyle="{DynamicResource GridViewColumnHeaderStyle}">
+                        <GridViewColumn.CellTemplate>
+                            <DataTemplate>
+                                <Border BorderBrush="#171a20" BorderThickness="1,0,0,0" Margin="-6,-23,0,-23">
+                                    <Label Content="{Binding Count}" ContentStringFormat="{}{0} pcs" Padding="10,0,0,0" Margin="0" HorizontalContentAlignment="Left" Foreground="#FFF0F0F0" VerticalAlignment="Center"/>
+                                </Border>
+                            </DataTemplate>
+                        </GridViewColumn.CellTemplate>
+                    </GridViewColumn>
+
+                    <GridViewColumn behaviours:GridViewColumnResize.Width="*" Width="Auto" Header="Sum" HeaderContainerStyle="{DynamicResource GridViewColumnHeaderStyle}">
+                        <GridViewColumn.CellTemplate>
+                            <DataTemplate>
+                                <Border BorderBrush="#171a20" BorderThickness="1,0,0,0" Margin="-6,-23,0,-23">
+                                    <Label Content="{Binding Total}" ContentStringFormat="## ### ### ###.00 sum" Padding="10,0,0,0" Margin="0" HorizontalContentAlignment="Left" Foreground="#FFF0F0F0" VerticalAlignment="Center"/>
+                                </Border>
+                            </DataTemplate>
+                        </GridViewColumn.CellTemplate>
+                    </GridViewColumn>
+
+                    <GridViewColumn Header="Edit" HeaderContainerStyle="{DynamicResource GridViewColumnHeaderStyle}" Width="120" >
+                        <GridViewColumn.CellTemplate>
+                            <DataTemplate>
+                                <Grid>
+                                    <Rectangle Width="1" Height="50" Fill="#171a20" HorizontalAlignment="Left" Margin="-6,-7,0,-7"/>
+                                    <StackPanel Orientation="Horizontal" Margin="2,5,0,5">
+                                        <!--<Border Margin="0" Width="20" Height="20" CornerRadius="100" Background="#FFE0E0E0">
+                                            <Ellipse Margin="0" Width="10" Height="10" HorizontalAlignment="Center" VerticalAlignment="Center">
+                                                <Ellipse.Style>
+                                                    <Style TargetType="Ellipse">
+                                                        <Setter Property="Fill" Value="#FF2BB618"/>
+                                                        <Style.Triggers>
+                                                            <DataTrigger Binding="{Binding Edit}" Value="False">
+                                                                <Setter Property="Fill" Value="#B61818" />
+                                                            </DataTrigger>
+                                                        </Style.Triggers>
+                                                    </Style>
+                                                </Ellipse.Style>
+                                            </Ellipse>
+                                        </Border>-->
+                                        <Button IsEnabled="False" Content="" Margin="9,0,0,0" HorizontalAlignment="Right" Height="35" VerticalAlignment="Center" Width="35" BorderBrush="#00000000" >
+                                            <Button.Background>
+                                                <ImageBrush ImageSource="/Resources/IconEdit.png" Stretch="Uniform"/>
+                                            </Button.Background>
+                                        </Button>
+                                        <Button IsEnabled="False" Content="" Margin="15,0,0,0" HorizontalAlignment="Right" Height="35" VerticalAlignment="Center" Width="35" BorderBrush="#00000000" >
+                                            <Button.Background>
+                                                <ImageBrush ImageSource="/Resources/IconView.png" Stretch="Uniform"/>
+                                            </Button.Background>
+                                        </Button>
+                                        <!--<Button Content="" Margin="7,0,0,0" HorizontalAlignment="Right" Height="35" VerticalAlignment="Center" Width="35" BorderBrush="#00000000" >
+                                            <Button.Background>
+                                                <ImageBrush ImageSource="/Resources/IconDelete.png" Stretch="Uniform"/>
+                                            </Button.Background>
+                                        </Button>-->
+                                    </StackPanel>
+                                </Grid>
+                            </DataTemplate>
+                        </GridViewColumn.CellTemplate>
+                    </GridViewColumn>
+                </GridView>
+            </ListView.View>
+        </ListView>
+        <Border Grid.Row="1" BorderBrush="#171a20" BorderThickness="0,1,0,0" Background="#FF292F37">
+            <StackPanel VerticalAlignment="Center">
+                <Button Command="{Binding OpenNewDialogCommand}" Content="Продажа" Template="{DynamicResource BtnStyleAddNew}" FontSize="13" FontWeight="Normal" Width="Auto" Height="37" HorizontalAlignment="Right" Margin="0,0,40,0" VerticalAlignment="Center"/>
+            </StackPanel>
+        </Border>
+    </Grid>
+</UserControl>

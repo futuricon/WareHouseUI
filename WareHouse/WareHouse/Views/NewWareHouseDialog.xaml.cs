@@ -13,14 +13,14 @@ using System.Windows.Shapes;
 
 namespace WareHouse.Views
 {
-    /// <summary>
-    /// Логика взаимодействия для NewWareHouseDialog.xaml
-    /// </summary>
-    public partial class NewWareHouseDialog : UserControl
-    {
-        public NewWareHouseDialog()
-        {
-            InitializeComponent();
-        }
-    }
+	/// <summary>
+	/// Interaction logic for NewWareHouseDialog.xaml
+	/// </summary>
+	public partial class NewWareHouseDialog : UserControl
+	{
+		public NewWareHouseDialog()
+		{
+			InitializeComponent();
+		}
+	}
 }

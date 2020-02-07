@@ -179,7 +179,7 @@ namespace WareHouse.Behaviours
                 else
                 {
                     double width = allowedSpace*(Percentage/totalPercentage);
-                    _element.Width = width;
+                    _element.Width =Math.Abs(width);
                 }
             }
         }

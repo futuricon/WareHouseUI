@@ -13,47 +13,14 @@ using System.Windows.Shapes;
 
 namespace WareHouse.Views
 {
-    /// <summary>
-    /// Логика взаимодействия для IncomeView.xaml
-    /// </summary>
-    public partial class IncomeView : UserControl
-    {
-        public IncomeView()
-        {
-            InitializeComponent();
-            var orders = GetOrders();
-            if (orders.Count > 0)
-                listView.ItemsSource = orders;
-        }
-
-        private List<TestIncome> GetOrders()
-        {
-            return new List<TestIncome>()
-            {
-                new TestIncome(1, DateTime.Now, 50, 556565656, "TestName1" , true),
-                new TestIncome(1, DateTime.Now, 50, 556565656, "TestName1" , true),
-                new TestIncome(1, DateTime.Now, 50, 556565656, "TestName1" , true),
-                new TestIncome(1, DateTime.Now, 50, 556565656, "TestName1" , true),
-                new TestIncome(1, DateTime.Now, 50, 556565656, "TestName1" , true),
-                new TestIncome(1, DateTime.Now, 50, 556565656, "TestName1" , true),
-                new TestIncome(1, DateTime.Now, 50, 556565656, "TestName1" , true),
-                new TestIncome(1, DateTime.Now, 50, 556565656, "TestName1" , true),
-                new TestIncome(1, DateTime.Now, 50, 556565656, "TestName1" , true),
-                new TestIncome(1, DateTime.Now, 50, 556565656, "TestName1" , true),
-                new TestIncome(1, DateTime.Now, 50, 556565656, "TestName1" , true),
-                new TestIncome(1, DateTime.Now, 50, 556565656, "TestName1" , true),
-                new TestIncome(1, DateTime.Now, 50, 556565656, "TestName1" , true),
-                new TestIncome(1, DateTime.Now, 50, 556565656, "TestName1" , true),
-                new TestIncome(1, DateTime.Now, 50, 556565656, "TestName1" , true),
-                new TestIncome(1, DateTime.Now, 50, 556565656, "TestName1" , true),
-                new TestIncome(1, DateTime.Now, 50, 556565656, "TestName1" , true),
-                new TestIncome(1, DateTime.Now, 50, 556565656, "TestName1" , true),
-                new TestIncome(1, DateTime.Now, 50, 556565656, "TestName1" , true),
-                new TestIncome(1, DateTime.Now, 50, 556565656, "TestName1" , true),
-                new TestIncome(1, DateTime.Now, 50, 556565656, "TestName1" , true),
-                new TestIncome(1, DateTime.Now, 50, 556565656, "TestName1" , true),
-                new TestIncome(1, DateTime.Now, 50, 556565656, "TestName1" , true),
-            };
-        }
-    }
+	/// <summary>
+	/// Interaction logic for IncomeView.xaml
+	/// </summary>
+	public partial class IncomeView : UserControl
+	{
+		public IncomeView()
+		{
+			InitializeComponent();
+		}
+	}
 }

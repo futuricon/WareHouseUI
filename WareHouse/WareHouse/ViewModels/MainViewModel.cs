@@ -1,22 +1,13 @@
 ﻿using Prism.Commands;
-using Prism.Mvvm;
+using Prism.Regions;
 using Serilog;
 using System;
-using System.Collections.Generic;
-using System.Collections.ObjectModel;
-using System.IO;
-using System.Linq;
-using System.Net;
-using System.Text;
-using System.Threading;
-using System.Threading.Tasks;
-using System.Windows;
-using System.Windows.Input;
 using WareHouse.Models.Context;
 using WareHouse.Models.Infrastructure;
-using WareHouse.Models.Provider;
-using WpfControls;
-using WpfControls.Editors;
+using WareHouse.Models.Repositories;
+using WareHouse.Regions;
+using WareHouse.ViewModels.ViewModelBase;
+using WareHouse.Views;
 namespace WareHouse.ViewModels
 {
 	public class MainViewModel : MainViewBase
@@ -25,13 +16,15 @@ namespace WareHouse.ViewModels
 
 		public ILogger Logger { get; }
 
-		public MainViewModel(IConfigurationHelper helper, ISynchronizeFactory synchronizeFactory,ILogger logger) :base(helper)
+		public MainViewModel(IConfigurationHelper helper, ISynchronizeFactory synchronizeFactory,ILogger logger,IRegionManager regionManager, SeedData data) 
+			:base(helper, regionManager)
 		{
-			PreviewKeyDownCommand = new DelegateCommand<KeyEventArgs>(KeyUpEventHandler);
-			SendRequestCommand = new DelegateCommand(Synchronize);
+			//data.SetExpense();
 			this.synchronizeFactory = synchronizeFactory;
 			Logger = logger;
-			//Synchronize();
+
+			InitializeCommand();
+			InitializeViews();
 		}
 
 		private async void Synchronize()
@@ -73,21 +66,95 @@ namespace WareHouse.ViewModels
 		}
 		
 
-		private void KeyUpEventHandler(KeyEventArgs key)
-		{
-			if (key == null) return;
-			if (key.Key == Key.Enter)
-			{
-				if (ProductProvider.FilteredProducts == null || ProductProvider.FilteredProducts.Count() == 0) return;
+		//private void KeyUpEventHandler(KeyEventArgs key)
+		//{
+		//	if (key == null) return;
+		//	if (key.Key == Key.Enter)
+		//	{
+		//		if (ProductProvider.FilteredProducts == null || ProductProvider.FilteredProducts.Count() == 0) return;
 
-			SelectedItem = ProductProvider.FilteredProducts.FirstOrDefault();
-				IsDropDownOpen = false;
-			}
-		}
-
-		
+		//		SelectedItem = ProductProvider.FilteredProducts.FirstOrDefault();
+		//		IsDropDownOpen = false;
+		//	}
+		//}
 
 	
+		private void InitializeCommand()
+		{
+			WareHouseCommand = new DelegateCommand(OpenWareHouseView);
+			//PreviewKeyDownCommand = new DelegateCommand<KeyEventArgs>(KeyUpEventHandler);
+			SendRequestCommand = new DelegateCommand(Synchronize);
+			IncomeCommand = new DelegateCommand(OpenIncomeView);
+			RealizationCommand = new DelegateCommand(OpenRealizationView);
+			ExpenseCommand = new DelegateCommand(OpenExpenseView);
+			ProviderCommand = new DelegateCommand(OpenProviderView);
+			ClientCommand = new DelegateCommand(OpenClientView);
+			ReturnCommand = new DelegateCommand(OpenReturnView);
+			ProductCommand = new DelegateCommand(OpenProductView);
+		}
+
+		private void OpenProductView()
+		{
+			OpenViewBase(_productView, nameof(ProductView));
+		}
+
+		private void OpenReturnView()
+		{
+			OpenViewBase(null, null);
+		}
+
+		private void OpenClientView()
+		{
+			OpenViewBase(_clientView, nameof(ClientView));
+		}
+
+		private void OpenProviderView()
+		{
+			OpenViewBase(_providerView, nameof(ProviderView));
+		}
+
+		#region CommandRealization
+
+		private void OpenWareHouseView()
+		{
+			OpenViewBase(_wareHouseView, nameof(WareHouseView));
+		}	
+
+		private void OpenExpenseView()
+		{
+			OpenViewBase(_expensesView, nameof(ExpensesView));
+		}
+
+		private void OpenRealizationView()
+		{
+			OpenViewBase(_realizationView, nameof(RealizationView));
+		}
+
+		private void OpenIncomeView()
+		{
+			OpenViewBase(_incomeView, nameof(IncomeView));
+		}
+		#endregion
+
+		private void InitializeViews()
+		{
+			_wareHouseView = new WareHouseView();
+			_expensesView = new ExpensesView();
+			_incomeView = new IncomeView();
+			_realizationView = new RealizationView();
+			_clientView = new ClientView();
+			_providerView = new ProviderView();
+			_productView = new ProductView();
+		}
+
+		private void OpenViewBase(object view, string viewName, string regionName = RegionHelper.mainRegionName)
+		{
+			RegionManager.Regions[regionName].RemoveAll();
+			Logger.Information("Remove all region WareHouse");
+			if (view == null) return;
+			RegionManager.Regions[regionName].Add(view);
+			Logger.Information("Load view, name {0}", viewName);
+		}
 
 	}
 }

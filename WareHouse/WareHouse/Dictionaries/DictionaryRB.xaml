@@ -299,7 +299,7 @@
                     <VisualState x:Name="Normal">
                         <Storyboard>
                             <ColorAnimationUsingKeyFrames Storyboard.TargetProperty="(Panel.Background).(SolidColorBrush.Color)" Storyboard.TargetName="borderNew">
-                                <EasingColorKeyFrame KeyTime="0" Value="#FF1B2133"/>
+                                <EasingColorKeyFrame KeyTime="0" Value="#404955"/>
                             </ColorAnimationUsingKeyFrames>
                         </Storyboard>
                     </VisualState>
@@ -313,26 +313,26 @@
                     <VisualState x:Name="Pressed">
                         <Storyboard>
                             <ColorAnimationUsingKeyFrames Storyboard.TargetProperty="(Panel.Background).(SolidColorBrush.Color)" Storyboard.TargetName="borderNew">
-                                <EasingColorKeyFrame KeyTime="0" Value="#FF1B2133"/>
+                                <EasingColorKeyFrame KeyTime="0" Value="#404955"/>
                             </ColorAnimationUsingKeyFrames>
                         </Storyboard>
                     </VisualState>
                     <VisualState x:Name="Disabled"/>
                 </VisualStateGroup>
             </VisualStateManager.VisualStateGroups>
-            <Border x:Name="borderNew" CornerRadius="19" Background="#FF1B2133">
+            <Border x:Name="borderNew" CornerRadius="8" Background="#404955">
                 <Grid>
                     <Rectangle x:Name="NewIco" Width="18" Height="18" HorizontalAlignment="Left" Margin="7.5,0,0,0">
                         <Rectangle.Fill>
                             <ImageBrush ImageSource="/Resources/IconAddNew.png" Stretch="Uniform"/>
                         </Rectangle.Fill>
                     </Rectangle>
-                    <ContentPresenter x:Name="contentPresenterNew" Focusable="False" HorizontalAlignment="{TemplateBinding HorizontalContentAlignment}" Margin="41,0,0,0" RecognizesAccessKey="True" SnapsToDevicePixels="{TemplateBinding SnapsToDevicePixels}" VerticalAlignment="{TemplateBinding VerticalContentAlignment}"/>
+                    <ContentPresenter Width="Auto" Height="20" x:Name="contentPresenterNew" Focusable="False" HorizontalAlignment="Center" Margin="35,0,15,0" RecognizesAccessKey="True" SnapsToDevicePixels="{TemplateBinding SnapsToDevicePixels}" VerticalAlignment="Center"/>
                 </Grid>
             </Border>
         </Grid>
     </ControlTemplate>
-    
+
     <ControlTemplate x:Key="BtnStyleAddNew2" TargetType="{x:Type Button}">
         <Grid>
             <VisualStateManager.VisualStateGroups>
@@ -340,14 +340,14 @@
                     <VisualState x:Name="Normal">
                         <Storyboard>
                             <ColorAnimationUsingKeyFrames Storyboard.TargetProperty="(Panel.Background).(SolidColorBrush.Color)" Storyboard.TargetName="borderNew">
-                                <EasingColorKeyFrame KeyTime="0" Value="#FF292F37"/>
+                                <EasingColorKeyFrame KeyTime="0" Value="#404955"/>
                             </ColorAnimationUsingKeyFrames>
                         </Storyboard>
                     </VisualState>
                     <VisualState x:Name="MouseOver">
                         <Storyboard>
                             <ColorAnimationUsingKeyFrames Storyboard.TargetProperty="(Panel.Background).(SolidColorBrush.Color)" Storyboard.TargetName="borderNew">
-                                <EasingColorKeyFrame KeyTime="0" Value="#FF555960"/>
+                                <EasingColorKeyFrame KeyTime="0" Value="#404955"/>
                             </ColorAnimationUsingKeyFrames>
                         </Storyboard>
                     </VisualState>
@@ -361,7 +361,7 @@
                     <VisualState x:Name="Disabled"/>
                 </VisualStateGroup>
             </VisualStateManager.VisualStateGroups>
-            <Border x:Name="borderNew" CornerRadius="19" Width="auto" Background="#FF292F37">
+            <Border x:Name="borderNew" CornerRadius="19" Background="#404955">
                 <Grid>
                     <Rectangle x:Name="NewIco" Width="18" Height="18" HorizontalAlignment="Left" Margin="7.5,0,0,0">
                         <Rectangle.Fill>
@@ -369,6 +369,46 @@
                         </Rectangle.Fill>
                     </Rectangle>
                     <ContentPresenter x:Name="contentPresenterNew" Focusable="False" HorizontalAlignment="Center" Margin="35,0,10,0" RecognizesAccessKey="True" SnapsToDevicePixels="{TemplateBinding SnapsToDevicePixels}" VerticalAlignment="{TemplateBinding VerticalContentAlignment}"/>
+                </Grid>
+            </Border>
+        </Grid>
+    </ControlTemplate>
+    <ControlTemplate x:Key="BtnStyleAddNew2Del" TargetType="{x:Type Button}">
+        <Grid>
+            <VisualStateManager.VisualStateGroups>
+                <VisualStateGroup x:Name="CommonStates">
+                    <VisualState x:Name="Normal">
+                        <Storyboard>
+                            <ColorAnimationUsingKeyFrames Storyboard.TargetProperty="(Panel.Background).(SolidColorBrush.Color)" Storyboard.TargetName="borderNew">
+                                <EasingColorKeyFrame KeyTime="0" Value="#404955"/>
+                            </ColorAnimationUsingKeyFrames>
+                        </Storyboard>
+                    </VisualState>
+                    <VisualState x:Name="MouseOver">
+                        <Storyboard>
+                            <ColorAnimationUsingKeyFrames Storyboard.TargetProperty="(Panel.Background).(SolidColorBrush.Color)" Storyboard.TargetName="borderNew">
+                                <EasingColorKeyFrame KeyTime="0" Value="#FF555960"/>
+                            </ColorAnimationUsingKeyFrames>
+                        </Storyboard>
+                    </VisualState>
+                    <VisualState x:Name="Pressed">
+                        <Storyboard>
+                            <ColorAnimationUsingKeyFrames Storyboard.TargetProperty="(Panel.Background).(SolidColorBrush.Color)" Storyboard.TargetName="borderNew">
+                                <EasingColorKeyFrame KeyTime="0" Value="#404955"/>
+                            </ColorAnimationUsingKeyFrames>
+                        </Storyboard>
+                    </VisualState>
+                    <VisualState x:Name="Disabled"/>
+                </VisualStateGroup>
+            </VisualStateManager.VisualStateGroups>
+            <Border x:Name="borderNew" CornerRadius="19" Background="#FF292F37">
+                <Grid>
+                    <Rectangle x:Name="NewIco" Width="18" Height="18" HorizontalAlignment="Left" Margin="7.5,0,0,0">
+                        <Rectangle.Fill>
+                            <ImageBrush ImageSource="/Resources/IconDel.png" Stretch="Uniform"/>
+                        </Rectangle.Fill>
+                    </Rectangle>
+                    <ContentPresenter x:Name="contentPresenterNew" Focusable="False" HorizontalAlignment="{TemplateBinding HorizontalContentAlignment}" Margin="41,0,0,0" RecognizesAccessKey="True" SnapsToDevicePixels="{TemplateBinding SnapsToDevicePixels}" VerticalAlignment="{TemplateBinding VerticalContentAlignment}"/>
                 </Grid>
             </Border>
         </Grid>

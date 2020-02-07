@@ -13,47 +13,14 @@ using System.Windows.Shapes;
 
 namespace WareHouse.Views
 {
-    /// <summary>
-    /// Логика взаимодействия для ExpensesView.xaml
-    /// </summary>
-    public partial class ExpensesView : UserControl
-    {
-        public ExpensesView()
-        {
-            InitializeComponent();
-            var orders = GetOrders();
-            if (orders.Count > 0)
-                listView.ItemsSource = orders;
-        }
-
-        private List<TestExpenses> GetOrders()
-        {
-            return new List<TestExpenses>()
-            {
-                new TestExpenses(1, DateTime.Now, 556565656, "TestName1" , true),
-                new TestExpenses(1, DateTime.Now, 556565656, "TestName1" , true),
-                new TestExpenses(1, DateTime.Now, 556565656, "TestName1" , true),
-                new TestExpenses(1, DateTime.Now, 556565656, "TestName1" , true),
-                new TestExpenses(1, DateTime.Now, 556565656, "TestName1" , true),
-                new TestExpenses(1, DateTime.Now, 556565656, "TestName1" , true),
-                new TestExpenses(1, DateTime.Now, 556565656, "TestName1" , true),
-                new TestExpenses(1, DateTime.Now, 556565656, "TestName1" , true),
-                new TestExpenses(1, DateTime.Now, 556565656, "TestName1" , true),
-                new TestExpenses(1, DateTime.Now, 556565656, "TestName1" , true),
-                new TestExpenses(1, DateTime.Now, 556565656, "TestName1" , true),
-                new TestExpenses(1, DateTime.Now, 556565656, "TestName1" , true),
-                new TestExpenses(1, DateTime.Now, 556565656, "TestName1" , true),
-                new TestExpenses(1, DateTime.Now, 556565656, "TestName1" , true),
-                new TestExpenses(1, DateTime.Now, 556565656, "TestName1" , true),
-                new TestExpenses(1, DateTime.Now, 556565656, "TestName1" , true),
-                new TestExpenses(1, DateTime.Now, 556565656, "TestName1" , true),
-                new TestExpenses(1, DateTime.Now, 556565656, "TestName1" , true),
-                new TestExpenses(1, DateTime.Now, 556565656, "TestName1" , true),
-                new TestExpenses(1, DateTime.Now, 556565656, "TestName1" , true),
-                new TestExpenses(1, DateTime.Now, 556565656, "TestName1" , true),
-                new TestExpenses(1, DateTime.Now, 556565656, "TestName1" , true),
-                new TestExpenses(1, DateTime.Now, 556565656, "TestName1" , true),
-            };
-        }
-    }
+	/// <summary>
+	/// Interaction logic for ExpensesView.xaml
+	/// </summary>
+	public partial class ExpensesView : UserControl
+	{
+		public ExpensesView()
+		{
+			InitializeComponent();
+		}
+	}
 }

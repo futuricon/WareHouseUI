@@ -1,0 +1,167 @@
+﻿<UserControl x:Class="WareHouse.Views.NewIncomeDialogX"
+             xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+             xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
+             xmlns:localCtrl="http://wpfcontrols.com/"
+             xmlns:local="clr-namespace:WareHouse.Views"
+             xmlns:prism="http://prismlibrary.com/"
+             xmlns:behaviours="clr-namespace:WareHouse.Behaviours"
+             xmlns:j="clr-namespace:System.Windows.Interactivity;assembly=System.Windows.Interactivity"
+             xmlns:i="http://schemas.microsoft.com/expression/2010/interactivity"
+             prism:ViewModelLocator.AutoWireViewModel="True"
+             xmlns:materialDesign="http://materialdesigninxaml.net/winfx/xaml/themes"
+             mc:Ignorable="d" 
+             d:DesignHeight="600" d:DesignWidth="900">
+    <prism:Dialog.WindowStyle>
+        <Style TargetType="Window">
+            <Setter Property="prism:Dialog.WindowStartupLocation" Value="CenterScreen" />
+            <Setter Property="WindowStyle" Value="None"/>
+            <Setter Property="ResizeMode" Value="NoResize"/>
+            <Setter Property="ShowInTaskbar" Value="True"/>
+            <Setter Property="Background" Value="#FF292F37"/>
+            <Setter Property="Width" Value="1000"/>
+            <Setter Property="Height" Value="700"/>
+        </Style>
+    </prism:Dialog.WindowStyle>
+    <UserControl.Resources>
+       
+        <!--#region Style MD Theme Colors-->
+        <!-- primary -->
+        <SolidColorBrush x:Key="PrimaryHueLightBrush" Color="#FFFFFF"/>
+        <SolidColorBrush x:Key="PrimaryHueLightForegroundBrush" Color="#FFFFFF"/>
+        <SolidColorBrush x:Key="PrimaryHueMidBrush" Color="#FFFFFF"/>
+        <SolidColorBrush x:Key="PrimaryHueMidForegroundBrush" Color="#FFFFFF"/>
+        <SolidColorBrush x:Key="PrimaryHueDarkBrush" Color="Red"/>
+        <SolidColorBrush x:Key="PrimaryHueDarkForegroundBrush" Color="#FFE4E4E4"/>
+        <!-- accent -->
+        <SolidColorBrush x:Key="SecondaryAccentBrush" Color="#FFFFFF"/>
+        <SolidColorBrush x:Key="SecondaryAccentForegroundBrush" Color="#FFFFFF"/>
+        <!--#endregion Style MD Theme Colors-->
+
+    </UserControl.Resources>
+
+    <Grid>
+        <Border BorderBrush="#FF0F131B" BorderThickness="2" CornerRadius="30" Background="#FF1B2133">
+            <Grid>
+                <Grid.RowDefinitions>
+                    <RowDefinition Height="70"/>
+                    <RowDefinition Height="90"/>
+                    <RowDefinition Height="*"/>
+                    <RowDefinition Height="40"/>
+                </Grid.RowDefinitions>
+
+                <!--#region TopMenu-->
+                <Grid>
+                    <Label Content="Товары" HorizontalAlignment="Center" Height="30" FontSize="15" FontWeight="Normal" Foreground="White"/>
+                    <Button Command="{Binding CloseDialogCancelCommand}" Style="{StaticResource MaterialDesignFloatingActionMiniAccentButton}"  Width="32" Height="32" HorizontalAlignment="Right" Margin="0,0,20,0" Background="#404955" BorderBrush="#404955">
+                        <Rectangle Width="20" Height="20">
+                            <Rectangle.Fill>
+                                <ImageBrush ImageSource="/Resources/IconCloseX.png" Stretch="Uniform"/>
+                            </Rectangle.Fill>
+                        </Rectangle>
+                    </Button>
+
+                    <Rectangle Height="2" Fill="#FF0F131B" VerticalAlignment="Bottom"/>
+                </Grid>
+                <!--#endregion TopMenu-->
+
+                <!--#region UnderTopMenu-->
+                <Grid Grid.Row="1">
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition Width="Auto"/>
+                        <ColumnDefinition Width="Auto"/>
+                        <ColumnDefinition Width="*"/>
+                    </Grid.ColumnDefinitions>
+
+                    <StackPanel Orientation="Vertical" Margin="20,0,0,0">
+                        <Label Content="Клиент" Foreground="White" Margin="0,5,0,10"/>
+                        <Border Height="30" Background="#292F37" CornerRadius="18" Width="Auto" MinWidth="150">
+                            <Label Content="sdsdsdsdsd" Padding="10,0,10,0" Margin="0,5" HorizontalContentAlignment="Left" Foreground="#FFF0F0F0" VerticalAlignment="Center"/>
+                        </Border>
+                    </StackPanel>
+
+                    <StackPanel Grid.Column="1" Orientation="Vertical" Margin="20,0,0,0">
+                        <Label Content="Дата" Foreground="White" Margin="0,5,0,10"/>
+                        <Border Height="30" Background="#292F37" CornerRadius="18" Width="Auto" MinWidth="100">
+                            <Label Content="sdsdsdsdsd" ContentStringFormat="##.##.##" Padding="10,0,10,0" Margin="0,5" HorizontalContentAlignment="Left" Foreground="#FFF0F0F0" VerticalAlignment="Center"/>
+                        </Border>
+                    </StackPanel>
+                    <Rectangle Grid.ColumnSpan="3" Height="2" Fill="#FF0F131B" VerticalAlignment="Bottom"/>
+
+                </Grid>
+                <!--#endregion UnderTopMenu-->
+
+                <!--#region ListView-->
+                <Grid Grid.Row="2" Background="#FF292F37">
+                    <Grid.RowDefinitions>
+                        <RowDefinition Height="*"/>
+                        <!--<RowDefinition Height="50"/>-->
+                    </Grid.RowDefinitions>
+                    <ListView x:Name="listView" ItemsSource="{Binding OrderItemCollection}"  behaviours:GridViewColumnResize.Enabled="True" ItemContainerStyle="{StaticResource LVItemStyle}" ScrollViewer.HorizontalScrollBarVisibility="Disabled" HorizontalContentAlignment="Stretch" Foreground="#DDF9F9F9" Background="#FFBFBFBF" BorderBrush="{x:Null}" ScrollViewer.VerticalScrollBarVisibility="Visible">
+                        <ListView.View>
+                            <GridView>
+
+                                <!--#region NameColumn-->
+                                <GridViewColumn behaviours:GridViewColumnResize.Width="*" Width="Auto" x:Name="NameColumn" Header="Название Товара" HeaderContainerStyle="{DynamicResource GridViewColumnHeaderStyle}">
+                                    <GridViewColumn.CellTemplate>
+                                        <DataTemplate>
+                                            <Border Width="{Binding ElementName=NameColumn, Path=ActualWidth}" BorderBrush="#171a20" BorderThickness="1,0,0,0" Margin="-6,0,0,0">
+                                                <Grid>
+                                                    <Label Content="{Binding Price}" Padding="10,0,0,0" Margin="0,5" HorizontalContentAlignment="Left" Foreground="#FFF0F0F0" VerticalAlignment="Center"/>
+                                                </Grid>
+                                            </Border>
+                                        </DataTemplate>
+                                    </GridViewColumn.CellTemplate>
+                                </GridViewColumn>
+                                <!--#endregion NameColumn-->
+
+                                <!--#region PriceColumn-->
+                                <GridViewColumn behaviours:GridViewColumnResize.Width="*" Width="Auto" x:Name="PriceColumn" Header="Цена" HeaderContainerStyle="{DynamicResource GridViewColumnHeaderStyle}">
+                                    <GridViewColumn.CellTemplate>
+                                        <DataTemplate>
+                                            <Border Width="{Binding ElementName=PriceColumn, Path=ActualWidth}" BorderBrush="#171a20" BorderThickness="1,0,0,0" Margin="-6,0,0,0">
+                                                <Label Content="{Binding Price}" Padding="10,0,0,0" Margin="0,5" HorizontalContentAlignment="Left" Foreground="#FFF0F0F0" VerticalAlignment="Center"/>
+                                            </Border>
+                                        </DataTemplate>
+                                    </GridViewColumn.CellTemplate>
+                                </GridViewColumn>
+                                <!--#endregion PriceColumn-->
+
+                                <!--#region AmountColumn-->
+                                <GridViewColumn behaviours:GridViewColumnResize.Width="*" Width="Auto" x:Name="AmountColumn" Header="Кол. Товара" HeaderContainerStyle="{DynamicResource GridViewColumnHeaderStyle}">
+                                    <GridViewColumn.CellTemplate>
+                                        <DataTemplate>
+                                            <Border Width="{Binding ElementName=AmountColumn, Path=ActualWidth}" BorderBrush="#171a20" BorderThickness="1,0,0,0" Margin="-6,0,0,0">
+                                                <Label Content="{Binding Price}" Padding="10,0,0,0" Margin="0,5" HorizontalContentAlignment="Left" Foreground="#FFF0F0F0" VerticalAlignment="Center"/>
+                                            </Border>
+                                        </DataTemplate>
+                                    </GridViewColumn.CellTemplate>
+                                </GridViewColumn>
+                                <!--#endregion AmountColumn-->
+
+                                <!--#region StorageColumn-->
+                                <GridViewColumn behaviours:GridViewColumnResize.Width="*" Width="Auto" x:Name="StorageColumn" Header="Склад" HeaderContainerStyle="{DynamicResource GridViewColumnHeaderStyle}">
+                                    <GridViewColumn.CellTemplate>
+                                        <DataTemplate>
+                                            <Border Width="{Binding ElementName=StorageColumn, Path=ActualWidth}" BorderBrush="#171a20" BorderThickness="1,0,0,0" Margin="-6,0,0,0">
+                                                <Label Content="{Binding Price}" Padding="10,0,0,0" Margin="0,5" HorizontalContentAlignment="Left" Foreground="#FFF0F0F0" VerticalAlignment="Center"/>
+                                            </Border>
+                                        </DataTemplate>
+                                    </GridViewColumn.CellTemplate>
+                                </GridViewColumn>
+                                <!--#endregion StorageColumn-->
+
+                            </GridView>
+                        </ListView.View>
+                    </ListView>
+                </Grid>
+            </Grid>
+        </Border>
+        <i:Interaction.Triggers >
+            <i:EventTrigger EventName="PreviewKeyDown">
+                <prism:InvokeCommandAction Command="{Binding KeyUpEventCommand}" />
+            </i:EventTrigger>
+        </i:Interaction.Triggers>
+    </Grid>
+</UserControl>

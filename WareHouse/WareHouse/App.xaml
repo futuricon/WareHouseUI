@@ -5,12 +5,17 @@
              xmlns:prism="http://prismlibrary.com/">
     <Application.Resources>
         <ResourceDictionary>
+            <Style TargetType="ComboBoxItem">
+                <Setter Property="HorizontalContentAlignment" Value="Left" />
+                <Setter Property="VerticalContentAlignment" Value="Center" />
+            </Style>
+            
             <ResourceDictionary.MergedDictionaries>
                 <ResourceDictionary Source="pack://application:,,,/MaterialDesignThemes.Wpf;component/Themes/MaterialDesignTheme.Light.xaml" />
                 <ResourceDictionary Source="pack://application:,,,/MaterialDesignThemes.Wpf;component/Themes/MaterialDesignTheme.Defaults.xaml" />
                 <ResourceDictionary Source="pack://application:,,,/MaterialDesignColors;component/Themes/Recommended/Primary/MaterialDesignColor.Blue.xaml" />
                 <ResourceDictionary Source="pack://application:,,,/MaterialDesignColors;component/Themes/Recommended/Accent/MaterialDesignColor.Indigo.xaml" />
-                <ResourceDictionary Source="Dictionaries/DictionaryBtnTest.xaml"/>
+                <ResourceDictionary Source="Dictionaries/DictionaryMix.xaml"/>
                 <ResourceDictionary Source="Dictionaries/DictionaryRB.xaml"/>
             </ResourceDictionary.MergedDictionaries>
         </ResourceDictionary>

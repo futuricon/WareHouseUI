@@ -15,6 +15,7 @@ namespace WareHouse.Migrations
         {
 #pragma warning disable 612, 618
             modelBuilder
+                .HasAnnotation("Npgsql:Enum:role", "admin,worker")
                 .HasAnnotation("Npgsql:ValueGenerationStrategy", NpgsqlValueGenerationStrategy.IdentityByDefaultColumn)
                 .HasAnnotation("ProductVersion", "3.1.1")
                 .HasAnnotation("Relational:MaxIdentifierLength", 63);
@@ -29,7 +30,7 @@ namespace WareHouse.Migrations
                     b.Property<DateTime>("ChangedDate")
                         .HasColumnType("timestamp without time zone");
 
-                    b.Property<DateTime>("LastSync")
+                    b.Property<DateTime?>("LastSync")
                         .HasColumnType("timestamp without time zone");
 
                     b.Property<string>("Title")
@@ -53,15 +54,21 @@ namespace WareHouse.Migrations
                     b.Property<DateTime>("ChangedDate")
                         .HasColumnType("timestamp without time zone");
 
-                    b.Property<DateTime>("LastSync")
+                    b.Property<string>("FIO")
+                        .HasColumnType("text");
+
+                    b.Property<DateTime?>("LastSync")
                         .HasColumnType("timestamp without time zone");
+
+                    b.Property<string>("PhoneNumber")
+                        .HasColumnType("text");
 
                     b.HasKey("Id");
 
                     b.ToTable("Clients");
                 });
 
-            modelBuilder.Entity("WareHouse.Models.DbModels.Exemption", b =>
+            modelBuilder.Entity("WareHouse.Models.DbModels.Expense", b =>
                 {
                     b.Property<int>("Id")
                         .ValueGeneratedOnAdd()
@@ -80,12 +87,12 @@ namespace WareHouse.Migrations
                     b.Property<DateTime>("Date")
                         .HasColumnType("timestamp without time zone");
 
-                    b.Property<DateTime>("LastSync")
+                    b.Property<DateTime?>("LastSync")
                         .HasColumnType("timestamp without time zone");
 
                     b.HasKey("Id");
 
-                    b.ToTable("Exemptions");
+                    b.ToTable("Expenses");
                 });
 
             modelBuilder.Entity("WareHouse.Models.DbModels.Income", b =>
@@ -101,23 +108,18 @@ namespace WareHouse.Migrations
                     b.Property<DateTime>("Date")
                         .HasColumnType("timestamp without time zone");
 
-                    b.Property<DateTime>("LastSync")
+                    b.Property<DateTime?>("LastSync")
                         .HasColumnType("timestamp without time zone");
 
-                    b.Property<int?>("ProductId")
+                    b.Property<int>("ProviderTableId")
                         .HasColumnType("integer");
 
                     b.Property<double>("Total")
                         .HasColumnType("double precision");
 
-                    b.Property<int>("WareHouseId")
-                        .HasColumnType("integer");
-
                     b.HasKey("Id");
 
-                    b.HasIndex("ProductId");
-
-                    b.HasIndex("WareHouseId");
+                    b.HasIndex("ProviderTableId");
 
                     b.ToTable("Incomes");
                 });
@@ -132,32 +134,27 @@ namespace WareHouse.Migrations
                     b.Property<double>("Count")
                         .HasColumnType("double precision");
 
+                    b.Property<int>("IncomeId")
+                        .HasColumnType("integer");
+
                     b.Property<double>("Price")
                         .HasColumnType("double precision");
 
                     b.Property<int>("ProductId")
                         .HasColumnType("integer");
 
+                    b.Property<int>("WareHouseId")
+                        .HasColumnType("integer");
+
                     b.HasKey("Id");
+
+                    b.HasIndex("IncomeId");
 
                     b.HasIndex("ProductId");
 
+                    b.HasIndex("WareHouseId");
+
                     b.ToTable("IncomeItems");
-                });
-
-            modelBuilder.Entity("WareHouse.Models.DbModels.IncomeItemIncome", b =>
-                {
-                    b.Property<int>("IncomeId")
-                        .HasColumnType("integer");
-
-                    b.Property<int>("IncomeItemId")
-                        .HasColumnType("integer");
-
-                    b.HasKey("IncomeId", "IncomeItemId");
-
-                    b.HasIndex("IncomeItemId");
-
-                    b.ToTable("IncomeItemIncomes");
                 });
 
             modelBuilder.Entity("WareHouse.Models.DbModels.Order", b =>
@@ -176,7 +173,7 @@ namespace WareHouse.Migrations
                     b.Property<DateTime>("Date")
                         .HasColumnType("timestamp without time zone");
 
-                    b.Property<DateTime>("LastSync")
+                    b.Property<DateTime?>("LastSync")
                         .HasColumnType("timestamp without time zone");
 
                     b.Property<double>("Total")
@@ -199,27 +196,22 @@ namespace WareHouse.Migrations
                     b.Property<double>("Count")
                         .HasColumnType("double precision");
 
-                    b.Property<double>("Price")
-                        .HasColumnType("double precision");
-
-                    b.HasKey("Id");
-
-                    b.ToTable("OrderItems");
-                });
-
-            modelBuilder.Entity("WareHouse.Models.DbModels.OrderItemOrder", b =>
-                {
                     b.Property<int>("OrderId")
                         .HasColumnType("integer");
 
-                    b.Property<int>("OrderItemId")
+                    b.Property<double>("Price")
+                        .HasColumnType("double precision");
+
+                    b.Property<int>("ProductId")
                         .HasColumnType("integer");
 
-                    b.HasKey("OrderId", "OrderItemId");
+                    b.HasKey("Id");
 
-                    b.HasIndex("OrderItemId");
+                    b.HasIndex("OrderId");
 
-                    b.ToTable("OrderItemOrders");
+                    b.HasIndex("ProductId");
+
+                    b.ToTable("OrderItems");
                 });
 
             modelBuilder.Entity("WareHouse.Models.DbModels.Payment", b =>
@@ -241,7 +233,7 @@ namespace WareHouse.Migrations
                     b.Property<DateTime>("Date")
                         .HasColumnType("timestamp without time zone");
 
-                    b.Property<DateTime>("LastSync")
+                    b.Property<DateTime?>("LastSync")
                         .HasColumnType("timestamp without time zone");
 
                     b.HasKey("Id");
@@ -271,11 +263,8 @@ namespace WareHouse.Migrations
                     b.Property<double>("Count")
                         .HasColumnType("double precision");
 
-                    b.Property<DateTime>("LastSync")
+                    b.Property<DateTime?>("LastSync")
                         .HasColumnType("timestamp without time zone");
-
-                    b.Property<int?>("OrderItemId")
-                        .HasColumnType("integer");
 
                     b.Property<double>("Price")
                         .HasColumnType("double precision");
@@ -290,11 +279,36 @@ namespace WareHouse.Migrations
 
                     b.HasIndex("CategoryId");
 
-                    b.HasIndex("OrderItemId");
-
                     b.HasIndex("WareHouseId");
 
                     b.ToTable("Products");
+                });
+
+            modelBuilder.Entity("WareHouse.Models.DbModels.ProviderTable", b =>
+                {
+                    b.Property<int>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("integer")
+                        .HasAnnotation("Npgsql:ValueGenerationStrategy", NpgsqlValueGenerationStrategy.IdentityByDefaultColumn);
+
+                    b.Property<double>("Balance")
+                        .HasColumnType("double precision");
+
+                    b.Property<DateTime>("ChangedDate")
+                        .HasColumnType("timestamp without time zone");
+
+                    b.Property<string>("FIO")
+                        .HasColumnType("text");
+
+                    b.Property<DateTime?>("LastSync")
+                        .HasColumnType("timestamp without time zone");
+
+                    b.Property<string>("PhoneNumber")
+                        .HasColumnType("text");
+
+                    b.HasKey("Id");
+
+                    b.ToTable("Providers");
                 });
 
             modelBuilder.Entity("WareHouse.Models.DbModels.WareHouseTable", b =>
@@ -307,8 +321,11 @@ namespace WareHouse.Migrations
                     b.Property<DateTime>("ChangedDate")
                         .HasColumnType("timestamp without time zone");
 
-                    b.Property<DateTime>("LastSync")
+                    b.Property<DateTime?>("LastSync")
                         .HasColumnType("timestamp without time zone");
+
+                    b.Property<bool>("Status")
+                        .HasColumnType("boolean");
 
                     b.Property<string>("Title")
                         .HasColumnType("text");
@@ -318,32 +335,19 @@ namespace WareHouse.Migrations
 
                     b.HasKey("Id");
 
-                    b.ToTable("WareHouse");
+                    b.ToTable("WareHouses");
                 });
 
             modelBuilder.Entity("WareHouse.Models.DbModels.Income", b =>
                 {
-                    b.HasOne("WareHouse.Models.DbModels.Product", null)
+                    b.HasOne("WareHouse.Models.DbModels.ProviderTable", "ProviderTable")
                         .WithMany("Incomes")
-                        .HasForeignKey("ProductId");
-
-                    b.HasOne("WareHouse.Models.DbModels.WareHouseTable", "WareHouse")
-                        .WithMany("Incomes")
-                        .HasForeignKey("WareHouseId")
+                        .HasForeignKey("ProviderTableId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
                 });
 
             modelBuilder.Entity("WareHouse.Models.DbModels.IncomeItem", b =>
-                {
-                    b.HasOne("WareHouse.Models.DbModels.Product", "Product")
-                        .WithMany()
-                        .HasForeignKey("ProductId")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
-                });
-
-            modelBuilder.Entity("WareHouse.Models.DbModels.IncomeItemIncome", b =>
                 {
                     b.HasOne("WareHouse.Models.DbModels.Income", "Income")
                         .WithMany("IncomeItemCollection")
@@ -351,9 +355,15 @@ namespace WareHouse.Migrations
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
 
-                    b.HasOne("WareHouse.Models.DbModels.IncomeItem", "IncomeItem")
-                        .WithMany("IncomeItemCollection")
-                        .HasForeignKey("IncomeItemId")
+                    b.HasOne("WareHouse.Models.DbModels.Product", "Product")
+                        .WithMany("IncomeItems")
+                        .HasForeignKey("ProductId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
+                    b.HasOne("WareHouse.Models.DbModels.WareHouseTable", "WareHouse")
+                        .WithMany("IncomeItems")
+                        .HasForeignKey("WareHouseId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
                 });
@@ -367,7 +377,7 @@ namespace WareHouse.Migrations
                         .IsRequired();
                 });
 
-            modelBuilder.Entity("WareHouse.Models.DbModels.OrderItemOrder", b =>
+            modelBuilder.Entity("WareHouse.Models.DbModels.OrderItem", b =>
                 {
                     b.HasOne("WareHouse.Models.DbModels.Order", "Order")
                         .WithMany("OrderItemCollection")
@@ -375,9 +385,9 @@ namespace WareHouse.Migrations
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
 
-                    b.HasOne("WareHouse.Models.DbModels.OrderItem", "OrderItem")
-                        .WithMany("OrderItemCollection")
-                        .HasForeignKey("OrderItemId")
+                    b.HasOne("WareHouse.Models.DbModels.Product", "Product")
+                        .WithMany("OrderItems")
+                        .HasForeignKey("ProductId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
                 });
@@ -389,10 +399,6 @@ namespace WareHouse.Migrations
                         .HasForeignKey("CategoryId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
-
-                    b.HasOne("WareHouse.Models.DbModels.OrderItem", null)
-                        .WithMany("Products")
-                        .HasForeignKey("OrderItemId");
 
                     b.HasOne("WareHouse.Models.DbModels.WareHouseTable", "WareHouse")
                         .WithMany("Products")

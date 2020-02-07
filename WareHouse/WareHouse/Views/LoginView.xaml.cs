@@ -12,14 +12,14 @@ using System.Windows.Shapes;
 
 namespace WareHouse.Views
 {
-    /// <summary>
-    /// Логика взаимодействия для LoginView.xaml
-    /// </summary>
-    public partial class LoginView : Window
-    {
-        public LoginView()
-        {
-            InitializeComponent();
-        }
-    }
+	/// <summary>
+	/// Interaction logic for LoginView.xaml
+	/// </summary>
+	public partial class LoginView : Window
+	{
+		public LoginView()
+		{
+			InitializeComponent();
+		}
+	}
 }
